@@ -1,0 +1,12 @@
+1 - Explorar a base de dados OK
+2 - Detectar outliers OK
+3 - Detectar Missing values OK
+4 - Separar variáveis quantitativas e qualitativas OK
+5 - Verificar se as classes estão desbalanceadas OK
+6 - Correlação entre as variáveis quantitativas OK
+7 - Feature engineering OK
+8 - Particionamento da base OK
+9 - Correção de prevalência OK
+10 - Gerar arquivos pré-processado (Traino e teste) / Base Única OK
+11 - Gerar um arquivo de log OK
+12 - Consultar tabela log_operation OK
