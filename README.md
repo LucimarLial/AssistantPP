@@ -49,12 +49,11 @@ A tabela tb_log_operation é composta pelo atributos:
 
 ![](imgs/img-schema.png)
 
-```
+
 
 ## Consulta a tabela log pela ferramenta Assistant-PP
 
-Assistant-PP fornece a facilidade de consultar a tabela tb_log_operation para recuperar o fluxo de pré-processamento dos dados armazenado. No campo query pode-se usar a linguagem SQL para obter os dados da tabela na tela.
-```
+Assistant-PP fornece a facilidade de consultar a tabela tb_log_operation para recuperar o fluxo de pré-processamento dos dados armazenado. 
 
 ![](imgs/img-query-log.png)
 
