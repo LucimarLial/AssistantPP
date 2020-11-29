@@ -39,7 +39,7 @@ DB_IP=localhost
 DB_NAME=PP
 ```
 
-**A tabela tb_log_operation é composta pelo atributos:**
+**Dicionário de dados da tabela tb_log_operation:**
 
 ```
 1. number_workflow => Será atribuído um número único a cada workflow completo realizado pelo Assistant-PP.
