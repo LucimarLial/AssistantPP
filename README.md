@@ -4,10 +4,9 @@ Assistant-PP é uma ferramenta, desenvolvida em Python com o Framework Streamlit
 
 ![](imgs/img-assistente.png)
 
+**Funcionalidades disponíveis:**
 
 ```
-Funcionalidades disponíveis:
-
 1. Analisar e explorar o conjunto de dados;
 2. Detectar outliers;
 3. Detectar missing values;
@@ -40,10 +39,9 @@ DB_IP=localhost
 DB_NAME=PP
 ```
 
-A tabela tb_log_operation é composta pelo atributos:
+**A tabela tb_log_operation é composta pelo atributos:**
 
 ```
-
 1. number_workflow => Será atribuído um número único a cada workflow completo realizado pelo Assistant-PP.
 2. name_dataset => Nome do dataset, a ser processado.
 3. name_column => Nome da coluna que teve modificações.
@@ -51,7 +49,6 @@ A tabela tb_log_operation é composta pelo atributos:
 5. name_operator => Nome da operação aplicada aos dados, exemplo: discretização de dados.
 6. type_operator => Tipo da operação, exemplo: transformação de dados.
 7. timestamp => data e hora da operação executada.
-
 ```
 
 ![](imgs/img-schema.png)
