@@ -1080,7 +1080,7 @@ def main():
         
     else:
 
-        st.sidebar.markdown('## Consulta ao workflow capturado')
+        st.sidebar.markdown('## Consultar workflow')
         select_query_workflow = st.sidebar.selectbox('Consulta a tabela log', options=('Selecione uma opção', 'Fazer consulta'))
 
         if select_query_workflow != 'Fazer consulta':
@@ -1092,7 +1092,7 @@ def main():
 
             if query:
                 try:
-                    value_tal = st.slider('qdqwdqwdq', min_value=1, max_value=1000, value=5)
+                    value_tal = st.slider('', min_value=1, max_value=1000, value=5)
                     df_query = pd.read_sql(query, conn_db)
 
                     st.dataframe(df_query.head(value_tal))
