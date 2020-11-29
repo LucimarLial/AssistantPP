@@ -25,7 +25,7 @@ Assistant-PP suporta três opções de leitura dos dados que é em csv, xlsx (Ex
 
 E, por fim, para arquivos do tipo .csv, existe dois campos configuráveis para auxiliar na leitura dos dados, são eles separador e encoding do arquivo.
 
-## Configurando o ambiente para conexão ao banco de dados
+## Configuração da conexão com o banco de dados
 
 As operações realizadas pelo Assistant-PP serão armazenadas em BD, previamente criado (script disponível em AssistantPP/db/script_db_PostgreSQL).
 
@@ -57,7 +57,7 @@ DB_NAME=PP
 
 ## Consultar a tabela tb_log_operation pelo Assistant-PP
 
-Assistant-PP fornece a facilidade de consultar a tabela tb_log_operation para recuperar o fluxo de pré-processamento dos dados armazenado. 
+Assistant-PP fornece a facilidade de consultar a tabela tb_log_operation para recuperar o fluxo de pré-processamento de dados armazenado. 
 
 ![](imgs/img-query-log.png)
 
@@ -87,6 +87,17 @@ $ streamlit run run.py
 > streamlit run run.py
 ```
 
+## Executar o projeto com Anaconda Navigator
+
+```
+$ Abrir terminal
+$ cd AssistantPP
+$ streamlit run run.py
+```
+## Acessar o Assistant-PP
+
+``` endereço http://localhost:8501/```
+
 ## Executar o projeto com docker
 
 ```
@@ -96,20 +107,9 @@ $ docker image build -t streamlit:app .
 $ docker container run -p 8501:8501 -d streamlit:app
 ```
 
-## Executar o projeto com Anaconda Navigator
-
-```
-$ Abrir terminal
-$ cd AssistantPP
-$ streamlit run run.py
-```
-## Acessar a Assistant-PP
-
-``` endereço http://localhost:8501/```
-
 Para encontrar o container referente a aplicação:
 
-**Container específico a sua aplicação:**
+**Container da aplicação:**
 ```
 $ docker ps | grep 'streamlit:app'
 ```
@@ -128,7 +128,6 @@ $ docker stop <id_container>
 ```
 $ docker start <id_container>
 ```
-
 ## Deploy no heroku  usando Docker
 
 ```bash
@@ -136,5 +135,9 @@ $ heroku container:login
 $ heroku create <app_name>
 $ heroku container:push web --app <app_name>
 $ heroku container:release web --app <app_name>
-
 ```
+
+
+
+
+
