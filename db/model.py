@@ -44,7 +44,7 @@ class LogOperation(Base):
 
 
 
-# Salvo os dados no banco
+# Salvar as operações no banco
 def save_to_database_ORM(conn, **kwargs):
 
 	Session = sessionmaker(bind=conn)
@@ -68,14 +68,7 @@ def query_database_ORM_last_number_workflow(conn):
 	return query + 1
 
 
-# Arquivo que contem o script sql responsavel por executar a stored procedure e trigger
-# with open( os.path.join( DB_DIR, 'drop_duplicates.sql' ), 'r' ) as q:
-# 	query = q.read()
-
-
 # Cria a tabela no banco
 engine = database(is_table_log=True)
 LogOperation.__table__.create(bind=engine, checkfirst=True)
 
-# Executa a trigger para remover os registros duplicados
-# engine.execute(query)
