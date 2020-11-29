@@ -51,7 +51,7 @@ A tabela tb_log_operation é composta pelo atributos:
 
 
 
-## Consulta a tabela log pela ferramenta Assistant-PP
+## Consultar a tabela tb_log_operation pelo Assistant-PP
 
 Assistant-PP fornece a facilidade de consultar a tabela tb_log_operation para recuperar o fluxo de pré-processamento dos dados armazenado. 
 
