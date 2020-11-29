@@ -4,6 +4,8 @@ Assistant-PP é uma ferramenta, desenvolvida em Python com o Framework Streamlit
 
 ![](imgs/img-assistente.png)
 
+
+```
 Funcionalidades disponíveis:
 
 1. Analisar e explorar o conjunto de dados;
@@ -18,6 +20,7 @@ Funcionalidades disponíveis:
 10. Gerar datasets pré-processados (Treino e Teste) ou  Base Única;
 11. Armazenar as operações executadas na tabela "tb_log_operation" do BD (SGBD PostgreSQL); e
 12. Consultar tb_log_operation.
+```
 
 Assistant-PP suporta três opções de leitura dos dados que é em csv, xlsx (Excel) e banco de dados (PostgreSQL). No caso da escolha "banco de dados", é disponibilizado cinco campos para preenchimento: **(usuário, senha, IP, nome do banco e nome da tabela)**, para  estabelecimento da conexão com o banco de dados.
 
@@ -83,7 +86,6 @@ $ streamlit run run.py
 > streamlit run run.py
 ```
 
-
 ## Executar o projeto com docker
 
 ```
@@ -93,12 +95,16 @@ $ docker image build -t streamlit:app .
 $ docker container run -p 8501:8501 -d streamlit:app
 ```
 
+## Executar o projeto com Anaconda Navigator
+
 ```
-$ Abrir terminal, por exemplo via Anaconda Navigator
+$ Abrir terminal
 $ cd AssistantPP
 $ streamlit run run.py
 ```
-Em seguida, a aplicação estará disponível no endereço ```http://localhost:8501/```
+## Acessar a Assistant-PP
+
+``` endereço http://localhost:8501/```
 
 Para encontrar o container referente a aplicação:
 
