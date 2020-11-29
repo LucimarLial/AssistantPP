@@ -27,8 +27,6 @@ E, por fim, para arquivos do tipo .csv, existe dois campos configuráveis para a
 
 As operações realizadas pelo Assistant-PP serão armazenadas em BD, previamente criado (script disponível em AssistantPP/db/script_db_PostgreSQL).
 
-![](imgs/img-schema.png)
-
 Para estabelecimento da conexão é necessário configurar o arquivo .env,  localizado no diretório ```AssistantPP/db/.env```.
 
 Ex.:
@@ -36,7 +34,7 @@ Ex.:
 DB_USER=admin
 DB_PASSWD=admin
 DB_IP=localhost
-DB_NAME=dataset
+DB_NAME=PP
 ```
 
 A tabela tb_log_operation é composta pelo atributos:
@@ -49,13 +47,14 @@ A tabela tb_log_operation é composta pelo atributos:
 6. type_operator => Tipo da operação, exemplo: transformação de dados.
 7. timestamp => data e hora da operação executada.
 
-![](imgs/img-query.png)
+![](imgs/img-schema.png)
 
 ```
 
 ## Consulta a tabela log pela ferramenta Assistant-PP
 
 Assistant-PP fornece a facilidade de consultar a tabela tb_log_operation para recuperar o fluxo de pré-processamento dos dados armazenado. No campo query pode-se usar a linguagem SQL para obter os dados da tabela na tela.
+```
 
 ![](imgs/img-query-log.png)
 
