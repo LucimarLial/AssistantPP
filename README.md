@@ -42,6 +42,8 @@ DB_NAME=PP
 
 A tabela tb_log_operation é composta pelo atributos:
 
+```
+
 1. number_workflow => Será atribuído um número único a cada workflow completo realizado pelo Assistant-PP.
 2. name_dataset => Nome do dataset, a ser processado.
 3. name_column => Nome da coluna que teve modificações.
@@ -49,6 +51,8 @@ A tabela tb_log_operation é composta pelo atributos:
 5. name_operator => Nome da operação aplicada aos dados, exemplo: discretização de dados.
 6. type_operator => Tipo da operação, exemplo: transformação de dados.
 7. timestamp => data e hora da operação executada.
+
+```
 
 ![](imgs/img-schema.png)
 
