@@ -21,7 +21,7 @@ Abordagens automáticas que podem ser utilizadas:
 
 i) criar um novo valor para o atributo qualitativo que indique que o valor era desconhecido; e 
 
-ii) utilizar medidadas estatísticas para atributos quantitativos, tais como: média, moda ou mediana dos valores conhecidos.
+ii) utilizar medidas estatísticas para atributos quantitativos, tais como: média, moda ou mediana dos valores conhecidos.
 '''
 
 markdown_class_desbalance = '''

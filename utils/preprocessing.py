@@ -41,12 +41,12 @@ def detect_outliers(df, n, features):
         
         outlier_step = 1.5 * IQR # Multiplica o intervalo intequartil por 1.5
         
-        outlier_list_col = df[(df[col] < Q1 - outlier_step) | (df[col] > Q3 + outlier_step)].index # retorna os índices dos registros que contém outlier
+        outlier_list_col = df[(df[col] < Q1 - outlier_step) | (df[col] > Q3 + outlier_step)].index
         
-        outlier_indices.extend(outlier_list_col) # lista que contém os índices
+        outlier_indices.extend(outlier_list_col) 
         
-    outlier_indices = Counter(outlier_indices) # transforma esses índices e as contagens dos mesmos em um dicionário
-    multiple_outliers = list(k for k, v in outlier_indices.items() if v > n) # retorna os índices
+    outlier_indices = Counter(outlier_indices) 
+    multiple_outliers = list(k for k, v in outlier_indices.items() if v > n) 
     
     return multiple_outliers
 
@@ -252,7 +252,7 @@ def ordinal_encoder(df):
 
 def over_sampling(X, y):
     '''
-    Aplica o método over sampling para balancear as classes
+    Aplica o método oversampling para balancear as classes
     
     --------
     paramers:
@@ -273,7 +273,7 @@ def over_sampling(X, y):
 
 def under_sampling(X, y):
     '''
-    Aplica o método under sampling para balancear as classes
+    Aplica o método undersampling para balancear as classes
     
     --------
     paramers:
