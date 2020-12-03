@@ -38,7 +38,7 @@ dict_db = {
         'Oversampling', 'Undersampling', 'Houldout'
     ],
 
-    'type_operator': ['Data Cleaning', 'Data Reducion', 'Data Sampling', 'Data Transformation', 'Data Partition'],
+    'type_operator': ['Data Cleaning', 'Data Reduction', 'Data Sampling', 'Data Transformation', 'Data Partition'],
 
     'function_operator': [
         'Drop Outlier', 'Imputation -1', 'Imputation 0', 
@@ -59,17 +59,17 @@ last_number_workflow = query_database_ORM_last_number_workflow(conn=conn_db)
 
 def main():
     # -------------------------------- Sidebar -------------------------------
-    st.sidebar.markdown('## Carregar o conjunto de dados')
+    st.sidebar.markdown('## Load dataset')
 
-    select_type = st.sidebar.selectbox('Escolha a extensão do arquivo', options=[
-        'Selecione uma opção', 'csv', 'xlsx', 'banco de dados'
+    select_type = st.sidebar.selectbox('Choose the file extension', options=[
+        'Select an option', 'csv', 'xlsx', 'database'
     ])
 
     
-    sep_text_input = st.sidebar.text_input('Informe o separador do arquivo selecionado', value=',')
-    encoding_text_input = st.sidebar.text_input('Infome o encoding do arquivo selecionado', value='None')
+    sep_text_input = st.sidebar.text_input('Enter the separator of the selected file', value=',')
+    encoding_text_input = st.sidebar.text_input('Enter the encoding of the selected file', value='None')
 
-    file = st.sidebar.file_uploader('Uploader do arquivo', type=select_type)
+    file = st.sidebar.file_uploader('File uploader', type=select_type)
     
     
     if select_type == 'banco de dados':
@@ -106,7 +106,7 @@ def main():
     if df is not None:
         
         # 1. Análise Exploratória de Dados
-        st.title('   Assistente de Pré-Processamento de Dados para Problemas de Classificação')
+        st.title('   Data Pre-Processing Assistant for Classification Problems')
 
         st.markdown('<br>'*2, unsafe_allow_html=True)
 
@@ -346,26 +346,26 @@ def main():
         # ------------------------- Variáveis Categóricas ---------------------
         st.markdown('<br>', unsafe_allow_html=True)
         
-        st.markdown('#### Imputation of qualitative data')
+        st.markdown('#### Imputação dos dados qualitativos')
 
         st.markdown(cat_columns_list)
 
-        cat_imputer = st.selectbox('Choose an imputation option:', options=(
-            'Select an option',
-            'Imput with unknown',
+        cat_imputer = st.selectbox('Escolha uma opção de imputação:', options=(
+            'Selecione uma opção',
+            'Imputar com unknown',
             # 'Dropar'
         ))
 
-        if cat_imputer in 'Imput with unknown':
+        if cat_imputer in 'Imputar com unknown':
             df.fillna('unknown', inplace=True)
             na_dict = { 'NA %' : df[exploration[(exploration['NA %'].drop(columns_missing_to_remove) > 0) & (exploration['type'] == 'object')]['column']].isna().sum() }
             df_no_missing_values = pd.DataFrame(na_dict)
             st.dataframe(df_no_missing_values.T)
-            st.success('Values filled in successfully!')
+            st.success('Valores preenchidos com sucesso!')
 
             name_column_list_impute_unk = df_no_missing_values.index.tolist()
             for col in name_column_list_impute_unk:
-                save_to_database_ORM(conn_db, number_workflow=last_number_workflow, name_dataset=str(database_name), name_column=col, function_operator=dict_db['function_operator'][6], name_operator=dict_db['name_operator'][2], type_operator=dict_db['type_operator'][0], timestamp=datetime.now())
+                save_to_database_ORM(conn_db, number_workflow=last_number_workflow, name_dataset=str(database_name), name_column=col, function_operator=dict_db['function_operator'][6], name_operator=dict_db['name_operator'][1], type_operator=dict_db['type_operator'][0], timestamp=datetime.now())
 
         # elif cat_imputer in 'Dropar':
         #     df.dropna(axis=0, inplace=True)
@@ -561,7 +561,7 @@ def main():
 
                 if len(cat_features.columns.tolist()) > 1:
                     for col in cat_features.columns:
-                        save_to_database_ORM(conn_db, number_workflow=last_number_workflow, name_dataset=str(database_name), name_column=col, function_operator=dict_db['function_operator'][10], name_operator=dict_db['name_operator'][2], type_operator=dict_db['type_operator'][4], timestamp=datetime.now())
+                        save_to_database_ORM(conn_db, number_workflow=last_number_workflow, name_dataset=str(database_name), name_column=col, function_operator=dict_db['function_operator'][10], name_operator=dict_db['name_operator'][2], type_operator=dict_db['type_operator'][1], timestamp=datetime.now())
                 else:
                     save_to_database_ORM(conn_db, number_workflow=last_number_workflow, name_dataset=str(database_name), name_column=cat_features.columns.tolist()[0], function_operator=dict_db['function_operator'][10], name_operator=dict_db['name_operator'][2], type_operator=dict_db['type_operator'][1], timestamp=datetime.now())
 
@@ -1080,22 +1080,22 @@ def main():
         
     else:
 
-        st.sidebar.markdown('## Consultar workflow')
-        select_query_workflow = st.sidebar.selectbox('Consulta a tabela log', options=('Selecione uma opção', 'Fazer consulta'))
+        st.sidebar.markdown('## Workflow query ')
+        select_query_workflow = st.sidebar.selectbox('', options=('Selecione uma opção', 'Fazer consulta'))
 
         if select_query_workflow != 'Fazer consulta':
-            st.markdown('<h1 align="center">Assistente de Pré-Processamento de Dados para Problemas de Classificação</h1>', unsafe_allow_html=True)
+            st.markdown('<h1 align="center"> Data PreProcessing Assistant for Classification Problems </h1>', unsafe_allow_html=True)
             st.image('imgs/capa.png')
 
         if select_query_workflow == 'Fazer consulta':
-            query = st.text_area('Query')
+            query = st.text_area('Query input')
 
             if query:
                 try:
                     value_tal = st.slider('', min_value=1, max_value=1000, value=5)
                     df_query = pd.read_sql(query, conn_db)
 
-                    st.dataframe(df_query.head(value_tal))
+                    st.table(df_query.head(value_tal))
                 except Exception as e:
                     st.error('Query inválida!')
 
