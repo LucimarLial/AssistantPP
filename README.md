@@ -1,6 +1,6 @@
 ## Assistente de Pré-Processamento de Dados para Problemas de Classificação (Assistant-PP)
 
-Assistant-PP é uma ferramenta, desenvolvida em Python com o Framework Streamlit,  capaz de orientar o usuário não especialista, em pré-processamento de dados, a gerar dataset de treinamento e de teste, a partir de raw dataset. Dentre as funcionalidades disponíveis, destacam-se as possibilidades de limpezas e transformações, cuja finalidade é obtenção de dados mais precisos  para, posterior, consumo pelos algoritmos de aprendizado de máquina.
+Assistant-PP é uma ferramenta, desenvolvida em Python com o Framework Streamlit,  capaz de orientar o usuário não especialista, em pré-processamento de dados, a gerar dataset de treinamento e de teste, a partir de dataset raw. Dentre as funcionalidades disponíveis, destacam-se as funcionalidades de limpeza e de transformações de dados, para obtenção de dados mais precisos ao consumo, posterior, pelos algoritmos de aprendizado de máquina.
 
 ![](imgs/img-assistente.png)
 
