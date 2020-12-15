@@ -4,15 +4,15 @@
 
 CREATE TABLE public.tb_log_operation
 (
-    id integer NOT NULL DEFAULT nextval('log_operation_id_seq'::regclass),
+    id serial primary key,
     number_workflow integer,
     name_dataset character varying(500) COLLATE pg_catalog."default",
     name_column character varying(500) COLLATE pg_catalog."default",
     function_operator character varying(500) COLLATE pg_catalog."default",
     name_operator character varying(500) COLLATE pg_catalog."default",
     type_operator character varying(500) COLLATE pg_catalog."default",
-    "timestamp" timestamp without time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT tb_log_operation_pkey PRIMARY KEY (id)
+    "timestamp" timestamp without time zone NOT NULL DEFAULT CURRENT_TIMESTAMP
+    
 )
 WITH (
     OIDS = FALSE
@@ -23,7 +23,7 @@ ALTER TABLE public.tb_log_operation
     OWNER to postgres;
 
 
----Necess·rio para contornar problema de registros duplicados para cada reflesh do Assistant-PP, bug Framework Streamlit.
+---Necess√°rio para contornar problema de registros duplicados para cada reflesh do Assistant-PP, bug Framework Streamlit.
 
 CREATE OR REPLACE FUNCTION drop_duplicates() RETURNS trigger AS $$
 BEGIN
