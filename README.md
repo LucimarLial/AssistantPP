@@ -1,6 +1,6 @@
 ## Assistente de Pré-Processamento de Dados para Problemas de Classificação (Assistant-PP)
 
-Assistant-PP é uma ferramenta, desenvolvida em Python com o Framework Streamlit,  capaz de orientar o usuário não especialista, em pré-processamento de dados, a gerar dataset de treinamento e de teste, a partir de dataset raw. Dentre as funcionalidades disponíveis, destacam-se as funcionalidades de limpeza e de transformações de dados, para obtenção de dados mais precisos ao consumo, posterior, pelos algoritmos de aprendizado de máquina.
+Assistant-PP é uma ferramenta, desenvolvida em Python com o Framework Streamlit,  capaz de orientar o usuário não especialista em pré-processamento de dados a gerar dataset de treinamento e de teste, a partir de dataset raw. Dentre as funcionalidades disponíveis, destacam-se as funcionalidades de limpeza e de transformações de dados, para obtenção de dados mais precisos à execução dos algoritmos de aprendizado de máquina.
 
 ![](imgs/img-assistente.png)
 
@@ -16,7 +16,7 @@ Assistant-PP é uma ferramenta, desenvolvida em Python com o Framework Streamlit
 7. Feature engineering;
 8. Particionamento do dataset;
 9. Correção da amostragem de dados;
-10. Gerar datasets pré-processados (Treino e Teste) ou  Base Única;
+10. Gerar datasets pré-processados (Treinamento e Teste) ou  Base Única;
 11. Armazenar as operações executadas na tabela "tb_log_operation" do BD (SGBD PostgreSQL); e
 12. Consultar tb_log_operation.
 ```
@@ -46,9 +46,9 @@ DB_NAME=PP
 2. name_dataset => Nome do dataset, a ser processado.
 3. name_column => Nome da coluna que teve modificações.
 4. function_operator => Função usada para aplicar alguma mudança nos dados.
-5. name_operator => Nome da operação aplicada aos dados, exemplo: discretização de dados.
-6. type_operator => Tipo da operação, exemplo: transformação de dados.
-7. timestamp => data e hora da operação executada.
+5. name_operator => Nome do operador executado.
+6. type_operator => Tipo do operador executado.
+7. timestamp => data e hora da execução.
 ```
 
 ![](imgs/img-schema.png)
@@ -90,7 +90,7 @@ $ streamlit run run.py
 ## Executar o projeto com Anaconda Navigator
 
 ```
-$ Abrir terminal
+$ Abrir terminal, via Anaconda Navigator
 $ cd AssistantPP
 $ streamlit run run.py
 ```
