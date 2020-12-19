@@ -7,10 +7,10 @@ Assistant-PP é uma ferramenta, desenvolvida em Python com o Framework Streamlit
 **Funcionalidades disponíveis:**
 
 ```
-1. Analisar e explorar o conjunto de dados;
-2. Detectar outliers;
-3. Detectar missing values;
-4. Separar variáveis quantitativas e qualitativas;
+1. Separar colunas com tipos de dados quantitativos e qualitativos;
+2. Analisar e explorar o conjunto de dados, considerando medidas gerais e estatísticas e teóricas descritivas;
+3. Detectar outliers;
+4. Detectar missing values;
 5. Verificar se as classes estão desbalanceadas;
 6. Correlação entre as variáveis quantitativas e qualitativas;
 7. Feature engineering;
