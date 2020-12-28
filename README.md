@@ -42,10 +42,10 @@ DB_NAME=PP
 **Dicionário de dados da tabela tb_log_operation:**
 
 ```
-1. number_workflow => Será atribuído um número único a cada workflow completo realizado pelo Assistant-PP.
+1. number_workflow => Número único atribuído a cada workflow completo realizado pelo Assistant-PP.
 2. name_dataset => Nome do dataset, a ser processado.
 3. name_column => Nome da coluna que teve modificações.
-4. function_operator => Função usada para aplicar alguma mudança nos dados.
+4. function_operator => Nome da função usada para aplicar alguma mudança nos dados.
 5. name_operator => Nome do operador executado.
 6. type_operator => Tipo do operador executado.
 7. timestamp => data e hora da execução.
