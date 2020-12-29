@@ -21,7 +21,7 @@ Assistant-PP é uma ferramenta, desenvolvida em Python com o Framework Streamlit
 12. Consultar tb_log_operation.
 ```
 
-Assistant-PP suporta três opções de leitura dos dados que é em csv, xlsx (Excel) e banco de dados (PostgreSQL). No caso da escolha "banco de dados", é disponibilizado cinco campos para preenchimento: **(usuário, senha, IP, nome do banco e nome da tabela)**, para  estabelecimento da conexão com o banco de dados.
+Assistant-PP suporta três opções de leitura dos dados, a saber: csv, xlsx (Excel) e banco de dados (PostgreSQL). No caso da escolha "banco de dados", é disponibilizado cinco campos para preenchimento: **(usuário, senha, IP, nome do banco e nome da tabela)**, para  estabelecimento da conexão com o banco de dados.
 
 E, por fim, para arquivos do tipo .csv, existe dois campos configuráveis para auxiliar na leitura dos dados, são eles separador e encoding do arquivo.
 
