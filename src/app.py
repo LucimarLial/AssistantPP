@@ -41,13 +41,13 @@ dict_db = {
     'type_operator': ['Data Cleaning', 'Data Reduction', 'Data Sampling', 'Data Transformation', 'Data Partition'],
 
     'function_operator': [
-        'Drop Outlier', 'Imputation -1', 'Imputation 0', 
-        'Imputation average', 'Imputation median', 'Imputation moda', 
-        'Imputation unknown', 'LabelEncoder', 'Drop qualitative column', 
-        'Drop quantitative column', 'Include qualitative column', 'Include quantitative column', 
+        'DropOutlier', 'Imputation-1', 'Imputation0', 
+        'ImputationAverage', 'ImputationMedian', 'ImputationModa', 
+        'ImputationUnknown', 'LabelEncoder', 'DropQualitativeColumn', 
+        'DropQuantitativeColumn', 'IncludeQualitativeColumn', 'IncludeQuantitativeColumn', 
         'KBinsDiscratizer', 'MinMaxScaler', 'StandardScaler', 
         'OneHotEncoder', 'OrdinalEncoder', 'SMOTE', 
-        'RandomUnderSampler', 'Unified database', 'train_test_split'
+        'RandomUnderSampler', 'Unified database', 'TrainTestSplit'
     ]
 
 }
