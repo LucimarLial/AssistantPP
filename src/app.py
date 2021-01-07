@@ -410,7 +410,7 @@ def main():
                     st.success('Classes com comportamentos próximos, de fato balanceada.')
                 else:
                     st.markdown('<br>', unsafe_allow_html=True)
-                    st.warning('Classes com possibilidade de estarem desbalanceadas. Recomenda-se o tratamento na seção 7 - Correção de Prevalência.')
+                    st.warning('Classes com possibilidade de estarem desbalanceadas. Recomenda-se o tratamento na seção 7 - Correção  da Amostragem de Dados.')
                     
                 st.markdown('<br>', unsafe_allow_html=True)
             
@@ -958,7 +958,7 @@ def main():
                     st.markdown('<br>', unsafe_allow_html=True)
                     
                     
-                    # 7 - Correção de prevalência
+                    # 7 - Correção da Amostragem de Dados
                     st.markdown('### 7 - Correção da Amostragem de Dados')
                                       
                     
