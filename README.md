@@ -18,7 +18,7 @@ Assistant-PP é uma ferramenta, desenvolvida em Python com o Framework Streamlit
 9. Correção da amostragem de dados;
 10. Gerar datasets pré-processados (Treinamento e Teste) ou  Base Única;
 11. Capturar e armazenar as informações de proveniência dos operadores de pré-processamento executados na tabela "tb_log_operation" do BD (SGBD PostgreSQL); e
-12. Consultar tb_log_operation.
+12. Consultar tb_log_operation, para recuperar informações de proveniência registradas.
 ```
 
 Assistant-PP suporta três opções de leitura dos dados, a saber: csv, xlsx (Excel) e banco de dados (PostgreSQL). No caso da escolha "banco de dados", é disponibilizado cinco campos para preenchimento: **(usuário, senha, IP, nome do banco e nome da tabela)**, para  estabelecimento da conexão com o banco de dados.
