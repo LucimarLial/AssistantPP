@@ -971,10 +971,10 @@ def main():
                         st.markdown(markdown_class_desbalance_v3)
                     
                     method_balance_select = st.selectbox('Escolha o método mais apropriado para o seu problema:', options=(
-                        'Selecione uma opção', 'Over-sampling', 'Under-sampling'
+                        'Selecione uma opção', 'Oversampling', 'Undersampling'
                     ))
                     
-                    if method_balance_select in 'Over-sampling':
+                    if method_balance_select in 'Oversampling':
                         try:
                             X_train, y_train = over_sampling(X_train, y_train)
 
@@ -982,18 +982,18 @@ def main():
                             for col in sampling_cols:
                                 save_to_database_ORM(conn_db, number_workflow=last_number_workflow, name_dataset=str(database_name), name_column=col, function_operator=dict_db['function_operator'][17], name_operator=dict_db['name_operator'][9], type_operator=dict_db['type_operator'][2], timestamp=datetime.now())
 
-                            st.success('Over-sampling aplicado com sucesso!')
+                            st.success('Oversampling aplicado com sucesso!')
                         except Exception as e:
                             st.markdown(e)              
                         
-                    if method_balance_select in 'Under-sampling':
+                    if method_balance_select in 'Undersampling':
                         X_train, y_train = under_sampling(X_train, y_train)
 
                         under_sampling_cols = X_train.columns.tolist() + [y.name]
                         for col in under_sampling_cols:
                             save_to_database_ORM(conn_db, number_workflow=last_number_workflow, name_dataset=str(database_name), name_column=col, function_operator=dict_db['function_operator'][18], name_operator=dict_db['name_operator'][10], type_operator=dict_db['type_operator'][2], timestamp=datetime.now())
                         
-                        st.success('Under-sampling aplicado com sucesso!')
+                        st.success('Undersampling aplicado com sucesso!')
                 
                 
                     train = pd.concat([X_train, y_train], axis=1).reset_index(drop=True)
