@@ -36,14 +36,14 @@ Na prática o modelo responderá muito bem as amostras da classe majoritária, m
 markdown_class_desbalance_v2 = '''
 Sampling é um pré-processamento que visa minimizar as discrepâncias entre as quantidades de amostras das classes do conjunto de dados, por meio de uma reamostragem. com a finalidade de gerar um conjunto de dados balanceado. Técnicas utilizadas para redefinir o tamanho do conjunto de dados:
 
-* **Over-sampling**: cria novas amostras da classe minoritária, a partir das informações contidas nos dados originais. Essa geração de novas amostras pode ser feita aleatoriamente com o auxílio de técnicas de clustering ou sinteticamente.
-* **Under-sampling**: reduz o desbalanceamento do conjunto de dados, eliminando aleatoriamente amostras da classe majoritária. 
+* **Oversampling**: cria novas amostras da classe minoritária, a partir das informações contidas nos dados originais. Essa geração de novas amostras pode ser feita aleatoriamente com o auxílio de técnicas de clustering ou sinteticamente.
+* **Undersampling**: reduz o desbalanceamento do conjunto de dados, eliminando aleatoriamente amostras da classe majoritária. 
 '''
 
 markdown_class_desbalance_v3 = '''
-* **Over-sampling** replica os dados já existentes, aumentando o número de instâncias das classes minoritárias. **A vantagem é que nenhuma informação é descartada**, porém o **custo computacional será elevado**.
+* **Oversampling** replica os dados já existentes, aumentando o número de instâncias das classes minoritárias. **A vantagem é que nenhuma informação é descartada**, porém o **custo computacional será elevado**.
 
-* **Under-sampling** extrai um subconjunto aleatório da classe majoritária, **preservando as características da classe**, sendo ideal para situações de grandes volumes de dados. Apesar de reduzir o tempo computacional e de armazenamento, **esta técnica descarta informações da classe majoritária**, o que pode levar a uma performance inferior em suas predições.
+* **Undersampling** extrai um subconjunto aleatório da classe majoritária, **preservando as características da classe**, sendo ideal para situações de grandes volumes de dados. Apesar de reduzir o tempo computacional e de armazenamento, **esta técnica descarta informações da classe majoritária**, o que pode levar a uma performance inferior em suas predições.
 '''
 
 markdown_binning = '''
