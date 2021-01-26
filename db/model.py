@@ -16,7 +16,8 @@ Base = declarative_base()
 BASE_DIR = os.path.join( os.path.abspath('.') )
 DB_DIR = os.path.join( BASE_DIR, 'db' )
 
-# Modelagem da tabela tb_log_operation
+# Modelagem da tabela tb_log_operation como classe Python
+# ORM (Object Relational Mapper) cria um wrapper orientado a objetos em torno da conexão do banco de dados, para que seja possível interagir com tabelas como classes Python.
 
 class LogOperation(Base):
 
