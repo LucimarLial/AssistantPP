@@ -23,7 +23,7 @@ ALTER TABLE public.tb_log_operation
     OWNER to postgres;
 
 
----Necessário para contornar problema de registros duplicados para cada reflesh do Assistant-PP, bug Framework Streamlit.
+---Necessário para garantir a consistência dos dados, pois foi detectado o problema de registros duplicados para cada reflesh do Assistant-PP, bug Framework Streamlit.
 
 CREATE OR REPLACE FUNCTION drop_duplicates() RETURNS trigger AS $$
 BEGIN
