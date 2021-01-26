@@ -16,7 +16,7 @@ def get_table_download_link(df):
 
 
 
-# ----------------------------- Configurações de cache de leitura de arqui
+# ----------------------------- Configurações de cache de leitura de arquivo
 class FileReference:
 
     def __init__(self, filename):
