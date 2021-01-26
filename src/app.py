@@ -69,7 +69,7 @@ def main():
     sep_text_input = st.sidebar.text_input('Insira o separador do arquivo selecionado', value=',')
     encoding_text_input = st.sidebar.text_input('Insira o encoding do arquivo selecionado', value='None')
 	
-    file = st.sidebar.file_uploader('File uploader', type=select_type)
+    file = st.sidebar.file_uploader('Uploader do arquivo', type=select_type)
     
     
     if select_type == 'banco de dados':
@@ -106,7 +106,7 @@ def main():
     if df is not None:
         
         # 1. Análise Exploratória de Dados
-        st.title('   Data Pre-Processing Assistant for Classification Problems')
+        st.title('   Assistente de pré-processamento de dados para problemas de classificação')
 
         st.markdown('<br>'*2, unsafe_allow_html=True)
 
