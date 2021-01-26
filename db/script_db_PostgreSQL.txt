@@ -1,3 +1,5 @@
+---Tabela para registrar a proveniência da execução dos operadores de pré-processamento no conjunto de dados
+
 -- Table: public.tb_log_operation
 
 -- DROP TABLE public.tb_log_operation;
