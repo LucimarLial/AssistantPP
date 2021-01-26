@@ -8,7 +8,7 @@ Assistant-PP é uma ferramenta, desenvolvida em Python com o Framework Streamlit
 
 ```
 1. Separar colunas com tipos de dados quantitativos e qualitativos;
-2. Analisar e explorar o conjunto de dados, considerando medidas gerais e estatísticas descritivas teóricas da informação;
+2. Analisar e explorar o conjunto de dados, considerando medidas gerais, estatísticas descritivas e teórica da informação;
 3. Detectar e tratar outliers;
 4. Detectar e imputar valores faltantes;
 5. Verificar se as classes estão desbalanceadas;
