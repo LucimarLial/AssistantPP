@@ -47,7 +47,7 @@ dict_db = {
         'DropQuantitativeColumn', 'IncludeQualitativeColumn', 'IncludeQuantitativeColumn', 
         'KBinsDiscratizer', 'MinMaxScaler', 'StandardScaler', 
         'OneHotEncoder', 'OrdinalEncoder', 'SMOTE', 
-        'RandomUnderSampler', 'Unified database', 'TrainTestSplit'
+        'RandomUnderSampler', 'UnifiedDatabase', 'TrainTestSplit'
     ]
 
 }
