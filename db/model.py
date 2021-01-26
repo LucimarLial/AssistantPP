@@ -17,6 +17,7 @@ BASE_DIR = os.path.join( os.path.abspath('.') )
 DB_DIR = os.path.join( BASE_DIR, 'db' )
 
 # Modelagem da tabela tb_log_operation
+
 class LogOperation(Base):
 
 	__tablename__ = 'tb_log_operation'
@@ -44,7 +45,8 @@ class LogOperation(Base):
 
 
 
-# Salvar as operações de pré-processamento no banco
+# Salvar as operações de pré-processamento em tb_log_operation
+
 def save_to_database_ORM(conn, **kwargs):
 
 	Session = sessionmaker(bind=conn)
@@ -54,13 +56,13 @@ def save_to_database_ORM(conn, **kwargs):
 	session.add(log_operation)
 
 	session.commit()
-
+	
+# incrementar number_workflow
+	
 def query_database_ORM_last_number_workflow(conn):
 
 	Session = sessionmaker(bind=conn)
-	session = Session()
-
-	# incrementar number_workflow
+	session = Session()	
 	
 	query = session.query(func.max(LogOperation.number_workflow)).first()[0]
 
@@ -70,7 +72,8 @@ def query_database_ORM_last_number_workflow(conn):
 	return query + 1
 
 
-# Cria a tabela no banco se não existir
+# Cria tb_log_operation no banco, caso não exista
+
 engine = database(is_table_log=True)
 LogOperation.__table__.create(bind=engine, checkfirst=True)
 
