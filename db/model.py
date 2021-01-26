@@ -44,7 +44,7 @@ class LogOperation(Base):
 
 
 
-# Salvar as operações no banco
+# Salvar as operações de pré-processamento no banco
 def save_to_database_ORM(conn, **kwargs):
 
 	Session = sessionmaker(bind=conn)
@@ -60,6 +60,8 @@ def query_database_ORM_last_number_workflow(conn):
 	Session = sessionmaker(bind=conn)
 	session = Session()
 
+	# incrementar number_workflow
+	
 	query = session.query(func.max(LogOperation.number_workflow)).first()[0]
 
 	if query is None:
@@ -68,7 +70,7 @@ def query_database_ORM_last_number_workflow(conn):
 	return query + 1
 
 
-# Cria a tabela no banco
+# Cria a tabela no banco se não existir
 engine = database(is_table_log=True)
 LogOperation.__table__.create(bind=engine, checkfirst=True)
 
