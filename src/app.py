@@ -335,13 +335,6 @@ def main():
             for col in name_column_list_imputer_moda:
                 save_to_database_ORM(conn_db, number_workflow=last_number_workflow, name_dataset=str(database_name), name_column=col, function_operator=dict_db['function_operator'][5], name_operator=dict_db['name_operator'][1], type_operator=dict_db['type_operator'][0], timestamp=datetime.now())
 
-        # elif imputer == 'Dropar':
-        #     df.dropna(axis=0, inplace=True)
-        #     na_dict = { 'NA %' : df[exploration[(exploration['NA %'] > 0) & (exploration['type'] != 'object')]['column']].isna().sum() }
-        #     df_no_missing_values = pd.DataFrame(na_dict)
-        #     st.write(df.shape)
-        #     st.dataframe(df_no_missing_values.T)
-        #     st.markdown('**Valores preenchidos/removidos com sucesso!**')
 
         # ------------------------- Variáveis Categóricas ---------------------
         st.markdown('<br>', unsafe_allow_html=True)
@@ -366,15 +359,6 @@ def main():
             name_column_list_impute_unk = df_no_missing_values.index.tolist()
             for col in name_column_list_impute_unk:
                 save_to_database_ORM(conn_db, number_workflow=last_number_workflow, name_dataset=str(database_name), name_column=col, function_operator=dict_db['function_operator'][6], name_operator=dict_db['name_operator'][1], type_operator=dict_db['type_operator'][0], timestamp=datetime.now())
-
-        # elif cat_imputer in 'Dropar':
-        #     df.dropna(axis=0, inplace=True)
-        #     na_dict = { 'NA %' : df[exploration[(exploration['NA %'] > 0) & (exploration['type'] == 'object')]['column']].isna().sum() }
-        #     df_no_missing_values = pd.DataFrame(na_dict)
-        #     st.write(df.shape)
-        #     st.dataframe(df_no_missing_values.T)
-        #     st.markdown('**Valores preenchidos/removidos com sucesso!**')
-
 
 
         #  Separar variáveis quantitativas e qualitativas
