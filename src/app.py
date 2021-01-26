@@ -61,14 +61,14 @@ def main():
     # -------------------------------- Sidebar -------------------------------
     st.sidebar.markdown('## Load dataset')
 
-    select_type = st.sidebar.selectbox('Choose the file extension', options=[
-        'Select an option', 'csv', 'xlsx', 'database'
+    select_type = st.sidebar.selectbox('Escolha a extensão do arquivo', options=[
+        'Selecione uma opção', 'csv', 'xlsx', 'database'
     ])
 
     
-    sep_text_input = st.sidebar.text_input('Enter the separator of the selected file', value=',')
-    encoding_text_input = st.sidebar.text_input('Enter the encoding of the selected file', value='None')
-
+    sep_text_input = st.sidebar.text_input('Insira o separador do arquivo selecionado', value=',')
+    encoding_text_input = st.sidebar.text_input('Insira o encoding do arquivo selecionado', value='None')
+	
     file = st.sidebar.file_uploader('File uploader', type=select_type)
     
     
