@@ -5,9 +5,9 @@ import sqlalchemy as db
 from dotenv import load_dotenv, find_dotenv
 
 
+# carregar variáveis de ambiente para estabelecer conexão com o banco postgresql
 
 load_dotenv(find_dotenv())
-# load environment variables
 
 DB_USER = os.getenv("DB_USER")
 DB_PASSWD = os.getenv("DB_PASSWD")
