@@ -26,7 +26,7 @@ ii) utilizar medidas estatísticas para atributos quantitativos, tais como: méd
 
 markdown_class_desbalance = '''
 
-Em problemas de classificação quando há uma variação acentuada do número de objetos entre as classes o conjunto de dados é considerado desbalanceado, por exemplo: as classes A e B possuem a proporção de 80:20 ou de 90:10. 
+Em problemas de classificação, quando há uma variação acentuada do número de objetos entre as classes da coluna alvo o conjunto de dados é considerado desbalanceado, por exemplo: as classes A e B possuem a proporção de 80:20 ou de 90:10. 
 
 Esta situação poderá ocasionar o enviesamento do modelo, ou seja, o ajuste excessivo do modelo para as amostras da classe majoritária.
 
