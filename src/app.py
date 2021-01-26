@@ -229,10 +229,10 @@ def main():
         columns_missing_to_remove = st.multiselect('Informe as colunas que deseja remover, por conter grande volume de valores ausentes:', options=op7)
         
         num_columns_list = list(exploration[(exploration['NA %'] > percentual) & (
-            exploration['type'] != 'object')]['column'])
+            exploration['type'] != 'object')]['column']) #quantitativa
         
         cat_columns_list = list(exploration[(exploration['NA %'] > percentual) & (
-            exploration['type'] == 'object')]['column'])
+            exploration['type'] == 'object')]['column']) #qualitativa
         
         
         if columns_missing_to_remove:
