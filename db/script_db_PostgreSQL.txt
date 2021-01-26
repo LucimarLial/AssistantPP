@@ -1,4 +1,4 @@
----Tabela para registrar a proveniência da execução dos operadores de pré-processamento no conjunto de dados
+---Tabela tb_log_operation para registrar a proveniência da execução dos operadores de pré-processamento sobre as colunas do conjunto de dados
 
 -- Table: public.tb_log_operation
 
