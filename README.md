@@ -1,6 +1,6 @@
 ## Assistente de Pré-Processamento de Dados para Problemas de Classificação (Assistant-PP)
 
-Assistant-PP é uma ferramenta, desenvolvida em Python com o Framework Streamlit,  capaz de orientar o usuário não especialista em pré-processamento de dados a gerar dataset de treinamento e de teste, a partir de dataset raw. Dentre as funcionalidades disponíveis, destacam-se as funcionalidades de limpeza e de transformações de dados, para obtenção de dados mais precisos à execução dos algoritmos de aprendizado de máquina.
+Assistant-PP é uma ferramenta, desenvolvida em Python com o Framework Streamlit,  capaz de orientar o usuário não especialista em pré-processamento de dados a gerar dataset de treinamento e de teste, a partir de dataset raw. Dentre as funcionalidades disponíveis, destacam-se os operadores para limpeza, redução, transformação, correção de amostragem e particionamento de dados, os quais são disponíveis de acordo com os tipos de dados quantitativo ou qualitativo da (s) coluna (s), a fim de formatar conjuntos de dados a serem consumidos por algoritmos de aprendizado de máquina referentes à tarefa de aprendizado supervisionado de classificação.
 
 ![](imgs/img-assistente.png)
 
@@ -8,16 +8,16 @@ Assistant-PP é uma ferramenta, desenvolvida em Python com o Framework Streamlit
 
 ```
 1. Separar colunas com tipos de dados quantitativos e qualitativos;
-2. Analisar e explorar o conjunto de dados, considerando medidas gerais e estatísticas teóricas descritivas;
+2. Analisar e explorar o conjunto de dados, considerando medidas gerais e estatísticas descritivas teóricas da informação;
 3. Detectar e tratar outliers;
 4. Detectar e imputar valores faltantes;
 5. Verificar se as classes estão desbalanceadas;
 6. Correlação entre as variáveis quantitativas e qualitativas;
-7. Feature engineering;
+7. Feature engineering (normalização, padronização, codificação e discretização);
 8. Particionamento do dataset;
 9. Correção da amostragem de dados;
 10. Gerar datasets pré-processados (Treinamento e Teste) ou  Base Única;
-11. Capturar e armazenar as informações de proveniência dos operadores de pré-processamento executados na tabela "tb_log_operation" do BD (SGBD PostgreSQL); e
+11. Capturar e armazenar as informações de proveniência dos operadores de pré-processamento executados na tabela "tb_log_operation" do BD "PostgreSQL"; e
 12. Consultar tb_log_operation, para recuperar informações de proveniência registradas.
 ```
 
