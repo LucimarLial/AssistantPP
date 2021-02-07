@@ -14,17 +14,17 @@ from imblearn.under_sampling import RandomUnderSampler
 
 def detect_outliers(df, n, features):
     '''
-    Função responsável para detectar outliers no dataset
+    Responsible function to detect outliers in the dataset
     
     --------
     paramers:
-        df: dataset para analise
+        df: dataset for analysis
         type: DataFrame ou Series
         
-        n: informar o valor de até quantos outliers serão capturados
+        n: inform the value of up to how many outliers will be captured
         type: int
         
-        features: atributos da base de dados
+        features: database attributes
         type: list
         
         return: list
@@ -34,12 +34,12 @@ def detect_outliers(df, n, features):
     outlier_indices = []
     
     for col in features:
-        Q1 = np.percentile(df[col], 25) # Calcula o primeiro quartil
-        Q3 = np.percentile(df[col], 75) # calcula o terceiro quartil
+        Q1 = np.percentile(df[col], 25) # Calculates the first quartile
+        Q3 = np.percentile(df[col], 75) # Calculates the third quartile
         
-        IQR = Q3 - Q1 # Calcula o intervalo intequartil
+        IQR = Q3 - Q1 # Calculates the intequartile range
         
-        outlier_step = 1.5 * IQR # Multiplica o intervalo intequartil por 1.5
+        outlier_step = 1.5 * IQR # Multiplies the intequartile range by 1.5
         
         outlier_list_col = df[(df[col] < Q1 - outlier_step) | (df[col] > Q3 + outlier_step)].index
         
@@ -54,14 +54,14 @@ def detect_outliers(df, n, features):
 
 def detects_unbalanced_classes(df, col):
     ''' 
-    Função responsável por detectar se as classes estão desbalanceadas
+    Function responsible for detecting whether the classes are out of balance
     --------
     paramers:
     
         df: dataframe para análise
         type: pandas.Dataframe
         
-        col: coluna
+        col: column
         type: str
         
         return float
@@ -130,15 +130,15 @@ def binning(df, n_bins=None, encode=None, strategy=None):
 
 def scaling(df, target_name=None):
     '''
-    Aplica normalização nas variáveis numéricas
+    Applies normalization to numerical column
     
     --------
     paramers:
 
-        data:features para transformação
+        data:features for transformation
         type: pandas.DataFrame
         
-        target_name: nome da variável alvo
+        target_name: target column name
         type: str
         
     return pandas.DataFrame
@@ -169,7 +169,7 @@ def scaling(df, target_name=None):
 
 def standardization(df, target_name=None):
     '''
-    Aplica padronização nas variáveis numéricas
+    Applies standardization to numerical columns
     
     --------
     paramers:
@@ -177,7 +177,7 @@ def standardization(df, target_name=None):
         data:features para transformação
         type: pandas.DataFrame
         
-        target_name: nome da variável alvo
+        target_name: target variable name
         type; str
         
     return pandas.DataFrame
@@ -207,12 +207,12 @@ def standardization(df, target_name=None):
 
 def onehot_encoder(df):
     '''
-    Aplica onehot encoder nas variáveis categóricas nominais
+    Applies onehot encoder to the nominal categorical columns
     
     --------
     paramers:
 
-        data:features para transformação
+        data:features for transformation
         type: pandas.DataFrame
         
     return pandas.DataFrame
@@ -230,12 +230,12 @@ def onehot_encoder(df):
 
 def ordinal_encoder(df):
     '''
-    Aplica ordinal encoder nas variáveis categóricas ordinais
+    Applies ordinal encoder to ordinal categorical columns
     
     --------
     paramers:
 
-        data:features para transformação
+        data:features for transformation
         type: pandas.DataFrame
         
     return pandas.DataFrame
@@ -252,15 +252,15 @@ def ordinal_encoder(df):
 
 def over_sampling(X, y):
     '''
-    Aplica o método oversampling para balancear as classes
+    Apply the oversampling method to balance the classes
     
     --------
     paramers:
 
-        X: variáveis independentes
+        X: independent columns
         type: numpy.array 2D
         
-        y: variável dependente
+        y: dependent column
         type: numpy.array 1D
         
     return pandas.DataFrame
@@ -273,15 +273,15 @@ def over_sampling(X, y):
 
 def under_sampling(X, y):
     '''
-    Aplica o método undersampling para balancear as classes
+    Apply the undersampling method to balance the classes
     
     --------
     paramers:
 
-        X: variáveis independentes
+        X: independent columns
         type: numpy.array 2D
         
-        y: variável dependente
+        y: dependent column
         type: numpy.array 1D
         
     return pandas.DataFrame
