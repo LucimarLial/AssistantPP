@@ -61,27 +61,27 @@ def main():
     # -------------------------------- Sidebar -------------------------------
     st.sidebar.markdown('## Load dataset')
 
-    select_type = st.sidebar.selectbox('Escolha a extensão do arquivo', options=[
-        'Selecione uma opção', 'csv', 'xlsx', 'database'
+    select_type = st.sidebar.selectbox('Choose the file extension', options=[
+        'Select an option', 'csv', 'xlsx', 'database'
     ])
 
     
-    sep_text_input = st.sidebar.text_input('Insira o separador do arquivo selecionado', value=',')
-    encoding_text_input = st.sidebar.text_input('Insira o encoding do arquivo selecionado', value='None')
+    sep_text_input = st.sidebar.text_input('Insert the selected file separator', value=',')
+    encoding_text_input = st.sidebar.text_input('Enter the encoding of the selected file', value='None')
 	
     file = st.sidebar.file_uploader('Uploader do arquivo', type=select_type)
     
     
-    if select_type == 'banco de dados':
-        user = st.sidebar.text_input('Informe o usuário do banco de dados:')
-        passwd = st.sidebar.text_input('Informe a senha do banco de dados:', type='password')
-        db_ip = st.sidebar.text_input('Informe o IP de endereço do banco de dados')
-        db_name = st.sidebar.text_input('Informe o nome do banco de dados')
-        table_name = st.sidebar.text_input('Informe o nome da tabela')
+    if select_type == 'database':
+        user = st.sidebar.text_input('Inform the database user:')
+        passwd = st.sidebar.text_input('Enter the password for the database:', type='password')
+        db_ip = st.sidebar.text_input('Enter the IP address of the database:')
+        db_name = st.sidebar.text_input('Enter the name of the database:')
+        table_name = st.sidebar.text_input('Enter the name of the table:')
 
 
-    # -------------------------- Conteúdo da página principal ----------------
-    # Carregando os dados de arquivo
+    # -------------------------- Main page content  ----------------
+    # Uploading the file data
     @st.cache(allow_output_mutation=True)
     def read_file_data(file):
         if file is not None:
@@ -97,7 +97,7 @@ def main():
 
 
     if not isinstance(df, pd.DataFrame):
-        if select_type == 'banco de dados':
+        if select_type == 'database':
             if user and passwd and db_ip and db_name and table_name:
                 conn = database(db_user=user, db_passwd=passwd, db_ip=db_ip, db_name=db_name, is_table_log=False)
                 df = pd.read_sql_table(table_name, conn)
@@ -106,11 +106,11 @@ def main():
     if df is not None:
         
         # 1. Análise Exploratória de Dados
-        st.title('   Assistente de pré-processamento de dados para problemas de classificação')
+        st.title('   Data preprocessing assistant for classification problems')
 
         st.markdown('<br>'*2, unsafe_allow_html=True)
 
-        database_name = st.text_input('Informe o nome da base de dados:')
+        database_name = st.text_input('Enter the name of the database:')
     
         exploration = pd.DataFrame({
             'column': df.columns, 'type': df.dtypes, 'NA #': df.isna().sum(), 'NA %': (df.isna().sum() / df.shape[0]) * 100
@@ -118,42 +118,42 @@ def main():
 
         st.markdown('<br><br><br>', unsafe_allow_html=True)
         
-        st.markdown('### 1 - Análise Exploratória de Dados')
-        st.markdown('#### 1.1 - Informações do conjunto de dados')
-        if st.checkbox('Exibir dados brutos'):
+        st.markdown('### 1 - Exploratory Data Analysis')
+        st.markdown('#### 1.1 - Dataset information')
+        if st.checkbox('Display raw data'):
             st.markdown('<br>', unsafe_allow_html=True)
-            value = st.slider('Escolha o número de linhas:',
+            value = st.slider('Choose the number of lines:',
                               min_value=1, max_value=100, value=5)
             st.dataframe(df.head(value), width=900, height=600)
             
             st.markdown('<br><br>', unsafe_allow_html=True)
             
-            st.markdown('** Dimensão do conjunto de dados**')
+            st.markdown('** Dataset dimension**')
             st.markdown(df.shape)
             
             st.markdown('<br><br>', unsafe_allow_html=True)
             
-            st.markdown('**Estatística descritiva das colunas quantitativas**')
+            st.markdown('**Descriptive statistics of the quantitative columns**')
             st.dataframe(df.describe(), width=900, height=600)
             
             st.markdown('<br><br>', unsafe_allow_html=True)
             
             st.markdown(
-                '**Informações do conjunto de dados: Nome da coluna, Tipo, Números de NaNs (nulos) e Porcentagem de NaNs**')
+                '**Dataset information: Column name, Type, Numbers of NaNs (null) and Percentage of NaNs**')
             st.dataframe(exploration, width=900, height=600)
 
   
         st.markdown('<br><br>', unsafe_allow_html=True)
-        st.markdown('#### 1.2 - Distribuição das colunas quantitativas e qualitativas')
+        st.markdown('#### 1.2 - Distribution of quantitative and qualitative columns')
         #st.markdown('<br>', unsafe_allow_html=True)
         
         if st.checkbox('Plotar gráfico', key='21'):
             op6 = list(df.columns)
-            op6.insert(0, 'Selecione uma opção')
+            op6.insert(0, 'Select an option')
             
-            select_feature_quantitative = st.selectbox('Selecione uma coluna', options=op6)
+            select_feature_quantitative = st.selectbox('Select a column', options=op6)
             
-            if select_feature_quantitative not in 'Selecione uma opção':
+            if select_feature_quantitative not in 'Select an option':
                 sns.countplot(y=select_feature_quantitative, data=df, orient='h')
                 plt.title(str(select_feature_quantitative), fontsize=14)
                 st.pyplot()
@@ -162,77 +162,77 @@ def main():
            
         
         
-        # 2. Detectar outliers
+        # 2. Detect outliers 
         st.markdown('<br><br>', unsafe_allow_html=True)
         
-        st.markdown('### 2 - Limpeza de Dados')
-        st.markdown('#### 2.1 - Detectar e tratar outliers das colunas quantitativas')
+        st.markdown('### 2 - Data Cleaning')
+        st.markdown('#### 2.1 - Detect and treat quantitative column outliers')
         
         op = list(df.select_dtypes(include=[np.number]).columns)
-        op.insert(0, 'Selecione uma opção')
+        op.insert(0, 'Select an option')
         
-        select_boxplot = st.selectbox('Escolha a coluna para plotar um boxplot univariado:', options=op)
+        select_boxplot = st.selectbox('Choose the column to plot a univariate boxplot:', options=op)
         
-        if select_boxplot not in 'Selecione uma opção':
+        if select_boxplot not in 'Select an option:
             if len(select_boxplot) > 0:
                 colors = ['#B3F9C5']
                 sns.boxplot(x=select_boxplot, data=df.select_dtypes(include=[np.number]), palette=colors)
                 st.pyplot(dpi=100)
         else:
-            st.markdown('**Gráfico boxplot - breve explicação:**')
+            st.markdown('**Boxplot chart - brief explanation:**')
             st.image('imgs/boxplot-information.png', width=700)
             
         st.markdown('<br>', unsafe_allow_html=True)
         
-        if st.checkbox('Explicação do método utilizado'):
+        if st.checkbox('Explanation of the method used'):
             st.markdown(markdown_outliers)
         
             st.markdown('<br>', unsafe_allow_html=True)
         
-        is_remove_outliers_select = st.selectbox('Deseja remover outliers?', options=(
-            'Selecione uma opção', 'Sim', 'Não'
+        is_remove_outliers_select = st.selectbox('Want to remove outliers?', options=(
+            'Select an option', 'Yes', 'No'
         ))
         
         outliers_drop = detect_outliers(df, 2, list(exploration[exploration['type'] != 'object']['column'].index))
         
         
-        if is_remove_outliers_select in 'Sim':
+        if is_remove_outliers_select in 'Yes':
 
             df_copy = df.copy()
 
-            df = df.drop(outliers_drop, axis = 0).reset_index(drop=True) # removendo os outliers da base
+            df = df.drop(outliers_drop, axis = 0).reset_index(drop=True) # removing the outliers from the base
             st.dataframe(df_copy.loc[outliers_drop])
             st.write(df.shape)
-            st.success('Outliers removido com sucesso!')
+            st.success('Outliers successfully removed!')
 
             name_column_list_outliers = df.columns.tolist()
             for col in name_column_list_outliers:
                 save_to_database_ORM(conn_db, number_workflow=last_number_workflow, name_dataset=str(database_name), name_column=col, function_operator=dict_db['function_operator'][0], name_operator=dict_db['name_operator'][0], type_operator=dict_db['type_operator'][0], timestamp=datetime.now())
 
 
-        # 3. Detectar Missing values
+        # 3. Detect Missing values 
         st.markdown('<br><br>', unsafe_allow_html=True)
         
-        st.markdown('#### 2.2 - Detectar e tratar valores ausentes (missing values)')
+        st.markdown('#### 2.2 - Detect and treat missing values')
         
-        if st.checkbox('Explicação de missing values'):
+        if st.checkbox('Explanation of missing values'):
         
             st.markdown(markdown_missing_values)
         
             st.markdown('<br>', unsafe_allow_html=True)
         
         percentual = st.slider(
-            'Informe um limite de percentual de valor faltante:', min_value=0, max_value=100)
+            'Enter a missing value percentage limit:', min_value=0, max_value=100)
         
         op7 = list(df.columns)
-        op7.insert(0, 'Selecione uma opção')
-        columns_missing_to_remove = st.multiselect('Informe as colunas que deseja remover, por conter grande volume de valores ausentes:', options=op7)
+        op7.insert(0, 'Select an option')
+        columns_missing_to_remove = st.multiselect('Inform the columns you want to remove because they contain a large volume of missing values:', options=op7)
         
         num_columns_list = list(exploration[(exploration['NA %'] > percentual) & (
             exploration['type'] != 'object')]['column']) #quantitativa
         
         cat_columns_list = list(exploration[(exploration['NA %'] > percentual) & (
-            exploration['type'] == 'object')]['column']) #qualitativa
+            exploration['type'] == 'object')]['column']) #qualitative
         
         
         if columns_missing_to_remove:
@@ -260,157 +260,157 @@ def main():
         
         st.markdown('<br>', unsafe_allow_html=True)
 
-        # ---------------------------- Variáveis Numéricas --------------------
+        # ---------------------------- Quantitative Columns --------------------
         
-        st.markdown('#### Imputação dos dados quantitativos')
+        st.markdown('#### Imputation of quantitative data')
         
         st.markdown(num_columns_list)
 
-        imputer = st.selectbox('Escolha uma opção de imputação:', options=(
-            'Selecione uma opção',
-            'Imputar com -1',
-            'Imputar com 0',
-            'Imputar pela média',
-            'Imputar pela mediana',
-            'Imputar pela moda',
+        imputer = st.selectbox('Choose an imputation option:', options=(
+            'Select an option',
+            'Input with -1',
+            'Input with 0',
+            'Input with average',
+            'Input with median',
+            'Input with moda',
             # 'Dropar'
         ))
 
-        if imputer == 'Imputar com -1':
+        if imputer == 'Input with -1:
             df.fillna(-1, inplace=True)
             na_dict = { 'NA %' : df[exploration[(exploration['NA %'].drop(columns_missing_to_remove) > 0) & (exploration['type'] != 'object')]['column']].isna().sum() }
             df_no_missing_values = pd.DataFrame(na_dict)
             st.dataframe(df_no_missing_values.T)
-            st.success('Valores preenchidos com sucesso!')
+            st.success('Values successfully filled!')
 
             name_column_list_imputer1 = df_no_missing_values.index.tolist()
             for col in name_column_list_imputer1:
                 save_to_database_ORM(conn_db, number_workflow=last_number_workflow, name_dataset=str(database_name), name_column=col, function_operator=dict_db['function_operator'][1], name_operator=dict_db['name_operator'][1], type_operator=dict_db['type_operator'][0], timestamp=datetime.now())
 
 
-        elif imputer == 'Imputar com 0':
+        elif imputer == 'Input with 0':
             df.fillna(0, inplace=True)
             na_dict = { 'NA %' : df[exploration[(exploration['NA %'].drop(columns_missing_to_remove) > 0) & (exploration['type'] != 'object')]['column']].isna().sum() }
             df_no_missing_values = pd.DataFrame(na_dict)
             st.dataframe(df_no_missing_values.T)
-            st.success('Valores preenchidos com sucesso!')
+            st.success('Values successfully filled!')
 
             name_column_list_imputer0 = df_no_missing_values.index.tolist()
             for col in name_column_list_imputer0:
                 save_to_database_ORM(conn_db, number_workflow=last_number_workflow, name_dataset=str(database_name), name_column=col, function_operator=dict_db['function_operator'][2], name_operator=dict_db['name_operator'][1], type_operator=dict_db['type_operator'][0], timestamp=datetime.now())
 
-        elif imputer == 'Imputar pela média':
+        elif imputer == 'Input with average':
             df.fillna(
                 df[num_columns_list].mean(), inplace=True)
             na_dict = { 'NA %' : df[exploration[(exploration['NA %'].drop(columns_missing_to_remove) > 0) & (exploration['type'] != 'object')]['column']].isna().sum() }
             df_no_missing_values = pd.DataFrame(na_dict)
             st.dataframe(df_no_missing_values.T)
-            st.success('Valores preenchidos com sucesso!')
+            st.success('Values successfully filled!')
 
             name_column_list_imputer_avg = df_no_missing_values.index.tolist()
             for col in name_column_list_imputer_avg:
                 save_to_database_ORM(conn_db, number_workflow=last_number_workflow, name_dataset=str(database_name), name_column=col, function_operator=dict_db['function_operator'][3], name_operator=dict_db['name_operator'][1], type_operator=dict_db['type_operator'][0], timestamp=datetime.now())
 
-        elif imputer == 'Imputar pela mediana':
+        elif imputer == 'Input with median':
             df.fillna(
                 df[num_columns_list].median(), inplace=True)
             na_dict = { 'NA %' : df[exploration[(exploration['NA %'].drop(columns_missing_to_remove) > 0) & (exploration['type'] != 'object')]['column']].isna().sum() }
             df_no_missing_values = pd.DataFrame(na_dict)
             st.dataframe(df_no_missing_values.T)
-            st.success('Valores preenchidos com sucesso!')
+            st.success('Values successfully filled!')
 
             name_column_list_imputer_median = df_no_missing_values.index.tolist()
             for col in name_column_list_imputer_median:
                 save_to_database_ORM(conn_db, number_workflow=last_number_workflow, name_dataset=str(database_name), name_column=col, function_operator=dict_db['function_operator'][4], name_operator=dict_db['name_operator'][1], type_operator=dict_db['type_operator'][0], timestamp=datetime.now())
 
-        elif imputer == 'Imputar pela moda':
+        elif imputer == 'Input with moda':
             df.fillna(
                 df[num_columns_list].mode().iloc[0], inplace=True)
             na_dict = { 'NA %' : df[exploration[(exploration['NA %'].drop(columns_missing_to_remove) > 0) & (exploration['type'] != 'object')]['column']].isna().sum() }
             df_no_missing_values = pd.DataFrame(na_dict)
             st.dataframe(df_no_missing_values.T)
-            st.success('Valores preenchidos com sucesso!')
+            st.success('Values successfully filled!')
 
             name_column_list_imputer_moda = df_no_missing_values.index.tolist()
             for col in name_column_list_imputer_moda:
                 save_to_database_ORM(conn_db, number_workflow=last_number_workflow, name_dataset=str(database_name), name_column=col, function_operator=dict_db['function_operator'][5], name_operator=dict_db['name_operator'][1], type_operator=dict_db['type_operator'][0], timestamp=datetime.now())
 
 
-        # ------------------------- Variáveis Categóricas ---------------------
+        # ------------------------- Qualitative Columns ---------------------
         st.markdown('<br>', unsafe_allow_html=True)
         
-        st.markdown('#### Imputação dos dados qualitativos')
+        st.markdown('#### Imputation of qualitative data')
 
         st.markdown(cat_columns_list)
 
-        cat_imputer = st.selectbox('Escolha uma opção de imputação:', options=(
-            'Selecione uma opção',
-            'Imputar com unknown',
+        cat_imputer = st.selectbox('Choose an imputation option:', options=(
+            'Select an option',
+            'Input with unknown',
             # 'Dropar'
         ))
 
-        if cat_imputer in 'Imputar com unknown':
+        if cat_imputer in 'Input with unknown':
             df.fillna('unknown', inplace=True)
             na_dict = { 'NA %' : df[exploration[(exploration['NA %'].drop(columns_missing_to_remove) > 0) & (exploration['type'] == 'object')]['column']].isna().sum() }
             df_no_missing_values = pd.DataFrame(na_dict)
             st.dataframe(df_no_missing_values.T)
-            st.success('Valores preenchidos com sucesso!')
+            st.success('Values successfully filled!')
 
             name_column_list_impute_unk = df_no_missing_values.index.tolist()
             for col in name_column_list_impute_unk:
                 save_to_database_ORM(conn_db, number_workflow=last_number_workflow, name_dataset=str(database_name), name_column=col, function_operator=dict_db['function_operator'][6], name_operator=dict_db['name_operator'][1], type_operator=dict_db['type_operator'][0], timestamp=datetime.now())
 
 
-        #  Separar variáveis quantitativas e qualitativas
+        #  Separate quantitative and qualitative variables
         
         num_features = df.select_dtypes(include=[np.number]).copy()
         cat_features = df.select_dtypes(exclude=[np.number]).copy()
         
         
-        # 3. Verificar se as classes estão desbalanceadas
+        # 3. Check if the classes are unbalanced 
         st.markdown('<br><br>', unsafe_allow_html=True)
         
-        st.markdown('### 3 - Verificar Desbalanceamento entre Classes')
+        st.markdown('### 3 - Check imbalance between classes')
         
-        if st.checkbox('Explicação de desbalanceamento'):
+        if st.checkbox('Explanation of unbalance'):
         
             st.markdown(markdown_class_desbalance)
         
             st.markdown('<br>', unsafe_allow_html=True)
         
         op1 = list(df.columns)
-        op1.insert(0, 'Selecione uma opção')
+        op1.insert(0, 'Select an option')
         
-        select_target_desbalance = st.selectbox('Informe a coluna alvo:', options=op1)
+        select_target_desbalance = st.selectbox('Enter the target column:', options=op1)
         
-        if st.checkbox('Plotar gráfico'):
-            if select_target_desbalance not in 'Selecione uma opção':
-                sns.countplot(x=select_target_desbalance, data=df) # plota um gráfico countplot para verificar a distribuição das classes 
+        if st.checkbox('Plot graph'):
+            if select_target_desbalance not in 'select an option':
+                sns.countplot(x=select_target_desbalance, data=df) # plots a countplot chart to check the distribution of classes 
                 plt.title('Target', fontsize=14)
                 st.pyplot()
                     
                 if detects_unbalanced_classes(df, select_target_desbalance) < 20.0:
                     st.markdown('<br>', unsafe_allow_html=True)
-                    st.success('Classes com comportamentos próximos, de fato balanceada.')
+                    st.success('Classes with similar distribution, in fact balanced.')
                 else:
                     st.markdown('<br>', unsafe_allow_html=True)
-                    st.warning('Classes com possibilidade de estarem desbalanceadas. Recomenda-se o tratamento na seção 7 - Correção  da Amostragem de Dados.')
+                    st.warning('Classes with the possibility of being unbalanced. The treatment in section 7 - Data Sampling Correction is recommended.')
                     
                 st.markdown('<br>', unsafe_allow_html=True)
             
                     
                 if df[select_target_desbalance].dtypes == 'object':
                     
-                    st.warning('A coluna target é do tipo qualitativo - object. Necessário transformar seu tipo para quantitativo.')
+                    st.warning('The target column is of the type qualitative - object. It is necessary to transform its type to quantitative.')
                     
                     st.markdown('<br>', unsafe_allow_html=True)
                     
-                    is_transformer_target_select = st.selectbox('Deseja transformar a coluna target para o tipo quantitativo? (RECOMENDADO)', options=(
-                        'Selecione uma opção', 'Sim', 'Não'
+                    is_transformer_target_select = st.selectbox('Do you want to transform the target column to the quantitative type? (RECOMMENDED)', options=(
+                        'Select an option', 'Yes', 'No'
                     ))
                     
                    
-                    if is_transformer_target_select in 'Sim':
+                    if is_transformer_target_select in 'Yes':
                         encoder = LabelEncoder()
                         df[select_target_desbalance] = encoder.fit_transform(df[select_target_desbalance])
 
@@ -419,7 +419,7 @@ def main():
                         
                     
                     if df[select_target_desbalance].dtypes != 'object':
-                        st.success('Transformação realizada com sucesso!')
+                        st.success('Successful transformation!')
                    
 
                     num_features[select_target_desbalance] = df[select_target_desbalance].copy()
@@ -431,41 +431,41 @@ def main():
                     
                 
             else:
-                st.error('Informe uma coluna!')
+                st.error('Enter a column!')
             
             
         
-        # 4 - Correlação entre as variáveis quantitativas
+        # 4 - Correlation between quantitative columns 
         
         st.markdown('<br><br>', unsafe_allow_html=True)
         
-        st.markdown('### 4 - Redução de Dados - Feature Selection')
+        st.markdown('### 4 - Data Reduction - Feature Selection')
         
-        st.markdown('#### 4.1 - Correlação entre as colunas')
-        select_corr = st.selectbox(' 4.1.1 - Informe o método de correlação entre colunas quantitativas que deseja analisar:', options=(
-            'Selecione uma opção', 'pearson', 'kendall', 'spearman'
+        st.markdown('#### 4.1 - Correlation between columns')
+        select_corr = st.selectbox(' 4.1.1 - Enter the correlation method between quantitative columns you want to analyze:', options=(
+            'Select an option', 'pearson', 'kendall', 'spearman'
         ))
 
-        if st.checkbox('Explicação do método de correlação'):
+        if st.checkbox('Explanation of the correlation method'):
             st.markdown('''
-				**Correlação de Pearson**
-				* Colunas quantitativas
-				* Colunas com distribuição normal ou amostra suficientimente grande
-				* Preferível para relações do tipo linear
+				**Pearson's correlation**
+				* Quantitative columns
+				* Columns with normal distribution or sufficiently large sample
+				* Preferable for linear type relationships
 
 				**Correlação de Kerdell**
-				* Colunas em escala ordinal
-				* Preferível quando se têm amostras pequenas
+				* Ordinal scale columns 
+				* Preferable when having small samples
     
 				**Correlação de Spearman**
-				* Colunas quantitativas ou em escala ordinal
-				* Utilizar quando não se tem a normalidade das colunas
-				* Preferível quando não se tem uma relação linear
+				* Quantitative or ordinal scale columns
+				* Use when columns are not normal
+				* Preferable when there is no linear relationship 
 			''')
             
         st.markdown('<br>', unsafe_allow_html=True)
 
-        if select_corr != 'Selecione uma opção':
+        if select_corr != 'select an option':
             if df.shape[1] <= 30:
                 plt.rcParams['figure.figsize'] = (10, 8)
                 sns.heatmap(num_features.corr(method=select_corr), annot=True,
@@ -479,12 +479,12 @@ def main():
                 
         st.markdown('<br>', unsafe_allow_html=True)
         
-      #  st.markdown('#### 4.1.1 - Correlação entre as colunas quantitativas')
+      #  st.markdown('#### 4.1.1 - Correlation between quantitative columns')
 
         cat_features_delete = []
         
-        if st.checkbox('Colunas quantitativas', key='1'):
-            if st.checkbox('Quero usar todas as colunas', key='2'):
+        if st.checkbox('Quantitative columns', key='1'):
+            if st.checkbox('I want to use all columns', key='2'):
 
                 if len(num_features.columns.tolist()) > 1:
                     for col in num_features.columns:
@@ -493,18 +493,18 @@ def main():
                     save_to_database_ORM(conn_db, number_workflow=last_number_workflow, name_dataset=str(database_name), name_column=num_features.columns.tolist()[0], function_operator=dict_db['function_operator'][11], name_operator=dict_db['name_operator'][2], type_operator=dict_db['type_operator'][1], timestamp=datetime.now())
 
 
-                st.success('Todas as colunas quantitativas foram selecionadas!')
+                st.success('All quantitative columns were selected!')
             else:
                 
-                num_fit_features_radio = st.radio('Deseja incluir ou excluir colunas para o pré-processamento?', options=(
-                    'Incluir', 'Excluir'
+                num_fit_features_radio = st.radio('Do you want to include or exclude columns for preprocessing?', options=(
+                    'Include', 'Exclude'
                 ))
                 
                 st.markdown('<br>', unsafe_allow_html=True)
                 
-                if num_fit_features_radio in 'Incluir':
+                if num_fit_features_radio in 'Include':
                     num_fit_features_add = st.multiselect(
-                        'Selecione as colunas para inclusão', options=list(df.select_dtypes(include=[np.number]).columns))
+                        'Select columns to include', options=list(df.select_dtypes(include=[np.number]).columns))
                     num_features = num_features[num_fit_features_add]
 
                     
@@ -516,11 +516,11 @@ def main():
                             save_to_database_ORM(conn_db, number_workflow=last_number_workflow, name_dataset=str(database_name), name_column=num_fit_features_add[0], function_operator=dict_db['function_operator'][11], name_operator=dict_db['name_operator'][2], type_operator=dict_db['type_operator'][1], timestamp=datetime.now())
 
                     
-                    st.success(f'Colunas selecionadas -> {list(num_features.columns)}')
+                    st.success(f'Selected columns -> {list(num_features.columns)}')
                 
-                if num_fit_features_radio in 'Excluir':
+                if num_fit_features_radio in 'Exclude':
                     num_fit_features_delete = st.multiselect(
-                        'Selecione as colunas para exclusão', options=list(df.select_dtypes(include=[np.number]).columns)
+                        'Select columns to exclude', options=list(df.select_dtypes(include=[np.number]).columns)
                     )
                     num_features = num_features.drop(num_fit_features_delete, axis=1)
 
@@ -533,15 +533,15 @@ def main():
                             save_to_database_ORM(conn_db, number_workflow=last_number_workflow, name_dataset=str(database_name), name_column=num_fit_features_delete[0], function_operator=dict_db['function_operator'][9], name_operator=dict_db['name_operator'][2], type_operator=dict_db['type_operator'][1], timestamp=datetime.now())
 
                     
-                    st.success(f'Colunas disponíveis -> {list(num_features.columns)}')
+                    st.success(f'Available columns -> {list(num_features.columns)}')
         
         st.markdown('<br>', unsafe_allow_html=True)
         
-        st.markdown('#### 4.1.2 - A correlação entre as colunas qualitativas é baseada no cálculo da entropia')
+        st.markdown('#### 4.1.2 - The correlation between qualitative columns is based on the calculation of entropy')
         st.markdown('<br>', unsafe_allow_html=True)
                            
-        if st.checkbox('Colunas qualitativas', key='3'):
-            if st.checkbox('Quero usar todas as colunas', key='4'):
+        if st.checkbox('Qualitative columns', key='3'):
+            if st.checkbox('I want to use all columns', key='4'):
 
                 if len(cat_features.columns.tolist()) > 1:
                     for col in cat_features.columns:
@@ -550,17 +550,17 @@ def main():
                     save_to_database_ORM(conn_db, number_workflow=last_number_workflow, name_dataset=str(database_name), name_column=cat_features.columns.tolist()[0], function_operator=dict_db['function_operator'][10], name_operator=dict_db['name_operator'][2], type_operator=dict_db['type_operator'][1], timestamp=datetime.now())
 
 
-                st.success('Todas as colunas qualitativas foram selecionadas!')
+                st.success('All qualitative columns have been selected!')
             else: 
                 op2 = list(df.columns)
-                op2.insert(0, 'Selecione uma opção')
+                op2.insert(0, 'select an option')
                 
                 select_cat_corr = st.selectbox(
-                    'Informe a coluna alvo para calcular a correlação com as colunas qualitativas', options=op2)
+                    'Enter the target column to calculate the correlation with the qualitative columns', options=op2)
 
                 cat_corr = {}
 
-                if select_cat_corr != 'Selecione uma opção':
+                if select_cat_corr != 'select an option':
                     for col in cat_features.columns:
                         cat_corr[col] = conditional_entropy(
                             cat_features[col], df[select_cat_corr])
@@ -569,15 +569,15 @@ def main():
                 st.dataframe(series_cat_corr)
 
                 
-                cat_fit_features_add_radio = st.radio('Deseja incluir ou excluir colunas para o pré-processamento?', options=(
-                    'Incluir', 'Excluir'
+                cat_fit_features_add_radio = st.radio('Do you want to include or exclude columns for preprocessing?', options=(
+                    'Include', 'Exclude'
                 ), key='1')
                 
                 st.markdown('<br>', unsafe_allow_html=True)
                 
-                if cat_fit_features_add_radio in 'Incluir':
+                if cat_fit_features_add_radio in 'Include':
                     cat_fit_features_add = st.multiselect(
-                    'Selecione as coluna para inclusão', options=list(cat_features.columns))
+                    'Select columns to include', options=list(cat_features.columns))
                     
                     cat_features = cat_features[cat_fit_features_add]
 
@@ -590,11 +590,11 @@ def main():
                             save_to_database_ORM(conn_db, number_workflow=last_number_workflow, name_dataset=str(database_name), name_column=cat_fit_features_add[0], function_operator=dict_db['function_operator'][10], name_operator=dict_db['name_operator'][2], type_operator=dict_db['type_operator'][1], timestamp=datetime.now())
 
                     
-                    st.success(f'Colunas selecionadas -> {list(cat_features.columns)}')
+                    st.success(f'Selected columns -> {list(cat_features.columns)}')
                 
-                elif cat_fit_features_add_radio in 'Excluir':
+                elif cat_fit_features_add_radio in 'Exclude':
                     cat_fit_features_delete = st.multiselect(
-                        'Seleciona as colunas para exclusão', options=list(cat_features.columns)
+                        'Select columns to exclude', options=list(cat_features.columns)
                     )
                     cat_features_delete.append(cat_fit_features_delete)
                     
@@ -609,32 +609,32 @@ def main():
                             save_to_database_ORM(conn_db, number_workflow=last_number_workflow, name_dataset=str(database_name), name_column=cat_fit_features_delete[0], function_operator=dict_db['function_operator'][8], name_operator=dict_db['name_operator'][2], type_operator=dict_db['type_operator'][1], timestamp=datetime.now())
 
                     
-                    st.success(f'Colunas disponíveis -> {list(cat_features.columns)}')
+                    st.success(f'Available columns -> {list(cat_features.columns)}')
                             
         
         
         # 5 - Feature engineering       
         st.markdown('<br><br>', unsafe_allow_html=True)
         
-        st.markdown('### 5 - Transformação de Dados -  Feature Engineering')
+        st.markdown('### 5 - Data Transformation -  Feature Engineering')
         
         op3 = list(num_features.columns)
-        op3.insert(0, 'Selecione uma opção')
+        op3.insert(0, 'Select an option ')
         
-        select_target = st.selectbox('Informe a coluna alvo:', options=list(op3))
+        select_target = st.selectbox('Enter the target column:', options=list(op3))
         
         st.markdown('<br>', unsafe_allow_html=True)
         
               
-        if select_target not in 'Selecione uma opção':
+        if select_target not in 'Select an option':
             
             
-            if st.checkbox('Colunas quantitativas', key='5'):
+            if st.checkbox('Quantitative columns', key='5'):
                 
                 is_applied_binning = False
                 
                 if st.checkbox('Contínuas', key='6'):
-                    if st.checkbox('Explicação de Discretização'):        
+                    if st.checkbox('Explanation of Discretization'):        
                         st.markdown(markdown_binning)
             
                     n_bins_slider = st.slider('n_bins', min_value=2, max_value=20, value=5)
@@ -642,7 +642,7 @@ def main():
                     strategy_select = st.selectbox('strategy', options=('quantile', 'uniform', 'kmeans'))
                     
                     
-                    select_col_binning = st.multiselect('Informe as colunas que deseja aplicar a Discretização:', options=list(num_features.drop(select_target, axis=1).columns))
+                    select_col_binning = st.multiselect('Inform the columns you want to apply Discretization:', options=list(num_features.drop(select_target, axis=1).columns))
                     list_col_binning = list(select_col_binning)
                     st.markdown(list_col_binning)
                     st.markdown('<br>', unsafe_allow_html=True)
@@ -662,17 +662,17 @@ def main():
 
                     
                     if list_col_binning:
-                        st.success('Transformação realizada com sucesso!')
+                        st.success('Successful transformation!')
                 
-                if st.checkbox('Discretas e Contínuas'):
-                    if st.checkbox('Explicação de Normalização e Padronização'):   
+                if st.checkbox('Discreet and Continuous'):
+                    if st.checkbox('Explanation of Normalization and Standardization'):   
                         st.markdown(markdown_scaling)
                         st.markdown('<br>', unsafe_allow_html=True)
                         st.markdown(markdown_standardization)
                         
-                    select_method_var_quantitative = st.selectbox('Escolha o método:', options=('Selecione uma opção', 'Normalização', 'Padronização'))
+                    select_method_var_quantitative = st.selectbox('Choose the method:', options=('Select an option ', 'Normalization', 'Standardization'))
                     
-                    if select_method_var_quantitative in 'Normalização':
+                    if select_method_var_quantitative in 'Normalization':
                         if is_applied_binning:
                             num_features = pd.concat([
                                 scaling(num_features.drop(select_col_binning, axis=1), select_target),
@@ -687,7 +687,7 @@ def main():
                                 save_to_database_ORM(conn_db, number_workflow=last_number_workflow, name_dataset=str(database_name), name_column=num_features.columns.tolist()[0], function_operator=dict_db['function_operator'][13], name_operator=dict_db['name_operator'][3], type_operator=dict_db['type_operator'][3], timestamp=datetime.now())
 
                             
-                            st.success('Transformação realizada com sucesso!')
+                            st.success('Successful transformation!')
                         else:
                             num_features = scaling(num_features, select_target)
 
@@ -698,9 +698,9 @@ def main():
                             else:
                                 save_to_database_ORM(conn_db, number_workflow=last_number_workflow, name_dataset=str(database_name), name_column=num_features.columns.tolist()[0], function_operator=dict_db['function_operator'][13], name_operator=dict_db['name_operator'][3], type_operator=dict_db['type_operator'][3], timestamp=datetime.now())
 
-                            st.success('Transformação realizada com sucesso!')
+                            st.success('Successful transformation!')
                         
-                    if select_method_var_quantitative in 'Padronização':
+                    if select_method_var_quantitative in 'Standardization':
                         if is_applied_binning:
                             num_features = pd.concat([
                                 standardization(num_features.drop(select_col_binning, axis=1), select_target),
@@ -716,7 +716,7 @@ def main():
                                 save_to_database_ORM(conn_db, number_workflow=last_number_workflow, name_dataset=str(database_name), name_column=num_features.columns.tolist()[0], function_operator=dict_db['function_operator'][14], name_operator=dict_db['name_operator'][4], type_operator=dict_db['type_operator'][3], timestamp=datetime.now())
 
                             
-                            st.success('Transformação realizada com sucesso!')
+                            st.success('Successful transformation!')
                         else:
                             num_features = standardization(num_features, select_target)
 
@@ -727,12 +727,12 @@ def main():
                             else:
                                 save_to_database_ORM(conn_db, number_workflow=last_number_workflow, name_dataset=str(database_name), name_column=num_features.columns.tolist()[0], function_operator=dict_db['function_operator'][14], name_operator=dict_db['name_operator'][4], type_operator=dict_db['type_operator'][3], timestamp=datetime.now())
 
-                            st.success('Transformação realizada com sucesso!')
+                            st.success('Successful transformation!')
             
             st.markdown('<br>', unsafe_allow_html=True)
              
                        
-            if st.checkbox('Colunas qualitativas', key='7'):
+            if st.checkbox('Qualitative columns', key='7'):
                 
                 is_onehot_transform = False
                 is_ordinal_transform = False
@@ -740,11 +740,11 @@ def main():
                 no_preprocessed = []
                 
                 if st.checkbox('Nominal (OneHot Encoder)', key='8'):
-                    if st.checkbox('Explicação da codificação - OneHot Encoder'):  
+                    if st.checkbox('Coding explanation - OneHot Encoder'):  
                         st.markdown(markdown_onehot)
                         st.markdown('<br>', unsafe_allow_html=True)
                     
-                    select_cat_features_nominal = st.multiselect('Informe as colunas que deseja aplicar a codificação - OneHot Encoder:', options=list(cat_features.columns))
+                    select_cat_features_nominal = st.multiselect('Inform the columns you want to apply the encoding - OneHot Encoder:', options=list(cat_features.columns))
                     list_cat_features_nominal = list(select_cat_features_nominal)
                     st.markdown(list_cat_features_nominal)
                     
@@ -791,7 +791,7 @@ def main():
                     
                     if list_cat_features_ordinal:
                         no_preprocessed.extend(list_cat_features_ordinal)
-                        st.success('Transformação realizada com sucesso!')
+                        st.success('Successful transformation!')
                 
                 if is_onehot_transform:
                     cat_features = onehot_transform
@@ -818,25 +818,25 @@ def main():
             
      
             
-        # 8 - Gerar arquivos pré-processado (Traino e teste) / Base Única
-        st.markdown('### 6 - Partição de Dados - Treino e Teste ou Base Única')
+        # 8 - Generate preprocessed files (Trainee and test) / Single Base 
+        st.markdown('### 6 - Data Partition - Training and Testing or Single Base')
         
         
-        is_select_partition = st.selectbox('Deseja fazer o particionamento do conjunto de dados em Treino e Teste? ', options=('Selecione uma opção', 'Não', 'Sim'))
+        is_select_partition = st.selectbox('Do you want to partition the dataset in Training and Testing?', options=('Select an option', 'No', 'Yes'))
         st.markdown('<br>', unsafe_allow_html=True)
         
         
-        if is_select_partition in 'Selecione uma opção':
+        if is_select_partition in 'Select an option':
             pass
         else:
-            if is_select_partition in 'Não':
+            if is_select_partition in 'No':
                 op4 = list(num_features.columns)
-                op4.insert(0, 'Selecione uma opção')
+                op4.insert(0, 'Select an option')
                 
-                select_target_partition = st.selectbox('Informe a coluna alvo para realizar o particionamente do conjunto de dados:', options=list(op4))
+                select_target_partition = st.selectbox('Inform the target column to carry out the partitioning of the dataset:', options=list(op4))
                             
                 
-                if select_target_partition is not 'Selecione uma opção':
+                if select_target_partition is not 'Select an option':
                     if select_target_partition not in cat_features:
                         X = pd.concat([num_features.drop(select_target_partition, axis=1).reset_index(drop=True), cat_features], axis=1).reset_index(drop=True)
                         
@@ -849,10 +849,10 @@ def main():
                         st.success('Base disponível para download')
                     
                 
-                    is_completed_select = st.sidebar.selectbox('Finalizou todas as operações de pré-processamento?', options=('Não', 'Sim'))
+                    is_completed_select = st.sidebar.selectbox('Completed all preprocessing operations ?', options=('No', 'Yes'))
                     
                     
-                    if is_completed_select in 'Sim':
+                    if is_completed_select in 'Yes':
                         bs4_unified = get_table_download_link(unified_base)
                         
                         st.sidebar.markdown(f'''
@@ -895,23 +895,23 @@ def main():
 
 
                     else:
-                        st.sidebar.warning('Completou o pré-processamento?')
+                        st.sidebar.warning('Completed preprocessing?')
             
             
             
-            if is_select_partition in 'Sim':
+            if is_select_partition in 'Yes':
             
                 op5 = list(num_features.columns)
-                op5.insert(0, 'Selecione uma opção')
+                op5.insert(0, 'Select an option')
                 
-                select_target_partition = st.selectbox('Informe a coluna alvo para gerar o conjunto de dados pré-processado:', options=list(op5))
+                select_target_partition = st.selectbox('Enter the target column to generate the pre-processed dataset:', options=list(op5))
                 
                 st.markdown('<br>', unsafe_allow_html=True)
                 
                 
                 
                 
-                if select_target_partition != 'Selecione uma opção':
+                if select_target_partition != 'Select an option':
                     if select_target_partition not in cat_features:
                         X = pd.concat([num_features.drop(select_target_partition, axis=1).reset_index(drop=True), cat_features], axis=1).reset_index(drop=True)
                         
@@ -920,7 +920,7 @@ def main():
                     st.markdown('<br>', unsafe_allow_html=True)
                     
                     
-                    select_test_size = st.slider('Informe qual a proporção do tamanho da base de teste:', min_value=1, max_value=99, value=25)
+                    select_test_size = st.slider('Inform the proportion of the size of the test base:', min_value=1, max_value=99, value=25)
                     
                     st.write(X.shape)
                     st.write(y.shape)
@@ -930,11 +930,11 @@ def main():
                     
                     st.write(float(select_test_size) / 100.0)
                     
-                    st.markdown('**Base de treino**')
+                    st.markdown('**Training**')
                     st.write(X_train.shape)
                     st.write(y_train.shape)
                     
-                    st.markdown('**Base de teste**')
+                    st.markdown('**Testing**')
                     st.write(X_test.shape)
                     st.write(y_test.shape)
 
@@ -942,20 +942,20 @@ def main():
                     st.markdown('<br>', unsafe_allow_html=True)
                     
                     
-                    # 7 - Correção da Amostragem de Dados
-                    st.markdown('### 7 - Correção da Amostragem de Dados')
+                    # 7 - Correction of Data Sampling 
+                    st.markdown('### 7 - Correction of Data Sampling')
                                       
                     
                     st.markdown('<br>', unsafe_allow_html=True)
-                    if st.checkbox('Explicação de correção da amostragem de dados'):  
+                    if st.checkbox('Explanation of data sampling correction'):  
                         st.markdown(markdown_class_desbalance_v2)
                         st.markdown('<br>', unsafe_allow_html=True)
                     
-                    if st.checkbox('Explicação do método a utilizar'):
+                    if st.checkbox('Explanation of the method to be used'):
                         st.markdown(markdown_class_desbalance_v3)
                     
-                    method_balance_select = st.selectbox('Escolha o método mais apropriado para o seu problema:', options=(
-                        'Selecione uma opção', 'Oversampling', 'Undersampling'
+                    method_balance_select = st.selectbox('Choose the most appropriate method for your problem:', options=(
+                        'Select an option', 'Oversampling', 'Undersampling'
                     ))
                     
                     if method_balance_select in 'Oversampling':
@@ -966,7 +966,7 @@ def main():
                             for col in sampling_cols:
                                 save_to_database_ORM(conn_db, number_workflow=last_number_workflow, name_dataset=str(database_name), name_column=col, function_operator=dict_db['function_operator'][17], name_operator=dict_db['name_operator'][9], type_operator=dict_db['type_operator'][2], timestamp=datetime.now())
 
-                            st.success('Oversampling aplicado com sucesso!')
+                            st.success('Oversampling successfully applied!')
                         except Exception as e:
                             st.markdown(e)              
                         
@@ -977,16 +977,16 @@ def main():
                         for col in under_sampling_cols:
                             save_to_database_ORM(conn_db, number_workflow=last_number_workflow, name_dataset=str(database_name), name_column=col, function_operator=dict_db['function_operator'][18], name_operator=dict_db['name_operator'][10], type_operator=dict_db['type_operator'][2], timestamp=datetime.now())
                         
-                        st.success('Undersampling aplicado com sucesso!')
+                        st.success('Undersampling successfully applied!')
                 
                 
                     train = pd.concat([X_train, y_train], axis=1).reset_index(drop=True)
                     test = X_test
                 
-                    is_completed_select = st.sidebar.selectbox('Finalizou todas as operações de pré-processamento?', options=('Não', 'Sim'))
+                    is_completed_select = st.sidebar.selectbox('Completed all preprocessing operations?', options=('No', 'Yes'))
                     
                     
-                    if is_completed_select in 'Sim':
+                    if is_completed_select in 'Yes':
                         bs4_train = get_table_download_link(train)
                         
                         st.sidebar.markdown(f'''
@@ -1059,7 +1059,7 @@ def main():
                             save_to_database_ORM(conn_db, number_workflow=last_number_workflow, name_dataset=str(database_name), name_column=col, function_operator=dict_db['function_operator'][20], name_operator=dict_db['name_operator'][11], type_operator=dict_db['type_operator'][4], timestamp=datetime.now())
 
                     else:
-                        st.sidebar.warning('Completou o pré-processamento?')
+                        st.sidebar.warning('Have you completed pre-processing?')
                      
         
     else:
@@ -1081,7 +1081,7 @@ def main():
 
                     st.table(df_query.head(value_tal))
                 except Exception as e:
-                    st.error('Query inválida!')
+                    st.error('Invalid Query!')
 
 
         
