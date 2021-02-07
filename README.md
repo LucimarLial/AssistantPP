@@ -1,37 +1,37 @@
-## Assistente de Pré-Processamento de Dados para Problemas de Classificação (Assistant-PP)
+## Data Preprocessing Assistant for Classification Problems (Assistant-PP)
 
-Assistant-PP é uma ferramenta, desenvolvida em Python com o Framework Streamlit,  capaz de orientar o usuário não especialista em pré-processamento de dados a gerar dataset de treinamento e de teste, a partir de dataset raw. Dentre as funcionalidades disponíveis, destacam-se os operadores para limpeza, redução, transformação, correção de amostragem e particionamento de dados, os quais são disponíveis de acordo com os tipos de dados quantitativo ou qualitativo da (s) coluna (s), a fim de formatar conjuntos de dados a serem consumidos por algoritmos de aprendizado de máquina referentes à tarefa de aprendizado supervisionado de classificação.
+Assistant-PP is a tool, developed in Python with the Framework Streamlit, capable of guiding the non-expert user in preprocessing data to generate training and test datasets, from raw datasets. Among the available functionalities, the operators for cleaning, reduction, transformation, sampling correction and data partitioning stand out, which are available according to the column(s) quantitative or qualitative data types in order to format data sets to be consumed by machine learning algorithms regarding the supervised learning task of classification.
 
 ![](imgs/img-assistente.png)
 
-**Funcionalidades disponíveis:**
+**Available functionalities:**
 
 ```
-1. Separar colunas com tipos de dados quantitativos e qualitativos;
-2. Analisar e explorar o conjunto de dados, considerando medidas gerais, estatísticas descritivas e teórica da informação;
-3. Detectar e tratar outliers;
-4. Detectar e imputar valores faltantes;
-5. Verificar se as classes estão desbalanceadas;
-6. Correlação entre as variáveis quantitativas e qualitativas;
-7. Feature engineering (normalização, padronização, codificação e discretização);
-8. Particionamento do dataset;
-9. Correção da amostragem de dados;
-10. Gerar datasets pré-processados (Treinamento e Teste) ou  Base Única;
-11. Capturar e armazenar as informações de proveniência dos operadores de pré-processamento executados na tabela "tb_log_operation" do BD "PostgreSQL"; e
-12. Consultar tb_log_operation, para recuperar informações de proveniência registradas.
+1. Separate columns with quantitative and qualitative data types;
+2. Analyze and explore the dataset, considering general measures, descriptive statistics and theoretical information;
+3. Detect and treat outliers;
+4. Detect and impute missing values;
+5. Verify if the classes are unbalanced;
+6. Correlation between quantitative and qualitative columns;
+7. Feature engineering (normalization, standardization, codification and discretization);
+8. Partitioning of the dataset;
+9. Correction of data sampling;
+10. Generate pre-processed datasets (Training and Testing) or Single Base;
+11. Capture and store the provenance information of the preprocessing operators executed in the table "tb_log_operation" of the DB "PostgreSQL"; and
+12. Consult tb_log_operation, to retrieve registered provenance information.
 ```
 
-Assistant-PP suporta três opções de leitura dos dados, a saber: csv, xlsx (Excel) e banco de dados (PostgreSQL). No caso da escolha "banco de dados", é disponibilizado cinco campos para preenchimento: **(usuário, senha, IP, nome do banco e nome da tabela)**, para  estabelecimento da conexão com o banco de dados.
+Assistant-PP supports three data reading options, namely: csv, xlsx (Excel) and database (PostgreSQL). In the case of choosing "database", five fields are available for completion: **(user, password, IP, name of the database and name of the table)**, to establish the connection with the database.
 
-E, por fim, para arquivos do tipo .csv, existe dois campos configuráveis para auxiliar na leitura dos dados, são eles separador e encoding do arquivo.
+And finally, for .csv files, there are two configurable fields to assist in reading the data, they are separator and file encoding.
 
-## Configuração da conexão com o banco de dados
+## Database connection configuration
 
-As operações realizadas pelo Assistant-PP serão armazenadas em BD, previamente criado (script disponível em AssistantPP/db/script_db_PostgreSQL).
+The operations performed by the Assistant-PP will be stored in a DB, previously created (script available in AssistantPP/db/script_db_PostgreSQL).
 
-Para estabelecimento da conexão é necessário configurar o arquivo .env,  localizado no diretório ```AssistantPP/db/.env```.
+To establish the connection it is necessary to configure the .env file, located in the directory ```AssistantPP/db/.env```.
 
-Ex.:
+For example:
 ```
 DB_USER=admin
 DB_PASSWD=admin
@@ -39,29 +39,29 @@ DB_IP=localhost
 DB_NAME=PP
 ```
 
-**Dicionário de dados da tabela tb_log_operation:**
+**Data dictionary of table tb_log_operation:**
 
 ```
-1. number_workflow => Número único atribuído a cada workflow completo realizado pelo Assistant-PP.
-2. name_dataset => Nome do dataset, a ser processado.
-3. name_column => Nome da coluna que teve modificações.
-4. function_operator => Nome da função usada para aplicar alguma mudança nos dados.
-5. name_operator => Nome do operador executado.
-6. type_operator => Tipo do operador executado.
-7. timestamp => data e hora da execução.
+1. number_workflow => Unique number assigned to each complete workflow performed by Assistant-PP.
+2. name_dataset => Name of the dataset, to be processed.
+3. name_column => Name of the column that had modifications.
+4. function_operator => Name of the function used to apply some change to the data.
+5. name_operator => Name of executed operator.
+6. type_operator => Type of operator performed.
+7. timestamp => datetime of execution. 
 ```
 
 ![](imgs/img-schema.png)
 
 
 
-## Consultar a tabela tb_log_operation pelo Assistant-PP
+## Consult the tb_log_operation table by Assistant-PP 
 
-Assistant-PP fornece a facilidade de consultar a tabela tb_log_operation para recuperar o fluxo de pré-processamento de dados armazenado. 
+Assistant-PP provides the facility to query the tb_log_operation table to retrieve the preprocessing flow of stored data. 
 
 ![](imgs/img-query-log.png)
 
-## Executar o projeto
+## Execute the project
 
 **Linux e Mac**
 
@@ -87,18 +87,18 @@ $ streamlit run run.py
 > streamlit run run.py
 ```
 
-## Executar o projeto com Anaconda Navigator
+## Anaconda Navigator
 
 ```
-$ Abrir terminal, via Anaconda Navigator
+$ Open terminal, via Anaconda Navigator 
 $ cd AssistantPP
 $ streamlit run run.py
 ```
-## Acessar o Assistant-PP
+## Access the Assistant-PP
 
-``` endereço http://localhost:8501/```
+``` url http://localhost:8501/```
 
-## Executar o projeto com docker
+## Run the project with docker 
 
 ```
 $ git clone https://github.com/LucimarLial/AssistantPP.git
@@ -107,24 +107,24 @@ $ docker image build -t streamlit:app .
 $ docker container run -p 8501:8501 -d streamlit:app
 ```
 
-Para encontrar o container referente a aplicação:
+To find the container for the application: 
 
-**Container da aplicação:**
+**Container:**
 ```
 $ docker ps | grep 'streamlit:app'
 ```
 
-**Todos os containers:**
+**All containers:**
 ```
 $ docker ps -a
 ```
 
-**Comando para parar a execução do container:**
+**Command to stop the execution of the container:**
 ```
 $ docker stop <id_container>
 ```
 
-**Comando para executar o container novamente:**
+**Command to execute the container again:**
 ```
 $ docker start <id_container>
 ```
