@@ -1,97 +1,98 @@
-#Qualquer possível outlier obtido por esse método deve ser examinado no contexto do objetivo do conjunto de dados.
+#Any possible outlier obtained by this method should be examined in the context of the purpose of the dataset.
 
-#Agora podemos identificar quais pontos encontram-se fora desse intervalo, ou seja, podem ser considerados outliers.
+#Now we can identify which points are outside this range, that is, they can be considered outliers.
 
 markdown_outliers = '''
-O método de remoção de outilers usado neste projeto é o Amplitude Interquartil:
+The method of removing outilers used in this project is the Amplitude Interquartile: 
 
-    1 - Calcula o intervalo interquartil para os dados;
-    2 - Multiplicar o intervalo interquartil (IQR) pelo número 1.5;
-    3 - Adicionar 1,5 x (IQR) para o terceiro quartil. Qualquer número maior é um possível outlier; e
-    4 - Subtrair 1,5 x (IQR) a partir do primeiro quartil. Qualquer número menor que este é um possível outlier.
+    1 - Calculates the interquartile interval for the data;
+    2 - Multiply the interquartile interval (IQR) by the number 1.5;
+    3 - Add 1.5 x (IQR) for the third quartile. Any larger number is a possible outlier; and
+    4 - Subtract 1.5 x (IQR) from the first quartile. Any number smaller than this is a possible outlier.
     
-**Tudo que estiver fora da faixa  [Q1 - 1.5 X IQR, Q3 + 1.5 X IQR] é considerado um ponto anômalo para aquele padrão.**
+**Everything outside the range [Q1 - 1.5 X IQR, Q3 + 1.5 X IQR] is considered an anomalous point for that pattern.**
 
 '''
 
 markdown_missing_values = '''
-Algoritmos de Machine Learning não são capazes de lidar com valores ausentes (missing data). 
-Na maioria dos casos, imputar uma estimativa razoável de um valor de dado adequado é melhor do que deixá-lo em branco.
-Abordagens automáticas que podem ser utilizadas:
+Machine Learning algorithms are not able to handle missing values (missing data). 
+In most cases, assigning a reasonable estimate of a suitable data value is better than leaving it blank.
+Automatic approaches that can be used:
 
-i) criar um novo valor para o atributo qualitativo que indique que o valor era desconhecido; e 
+i) create a new value for the qualitative attribute that indicates that the value was unknown; e 
 
-ii) utilizar medidas estatísticas para atributos quantitativos, tais como: média, moda ou mediana dos valores conhecidos.
+ii) use statistical measures for quantitative attributes, such as: average, mode or median of known values.
 '''
 
 markdown_class_desbalance = '''
 
-Em problemas de classificação, quando há uma variação acentuada do número de objetos entre as classes da coluna alvo o conjunto de dados é considerado desbalanceado, por exemplo: as classes A e B possuem a proporção de 80:20 ou de 90:10. 
+In classification problems, when there is a marked variation in the number of objects between the classes in the target column the data set is considered unbalanced, for example: classes A and B have the proportion of 80:20 or 90:10. 
 
-Esta situação poderá ocasionar o enviesamento do modelo, ou seja, o ajuste excessivo do modelo para as amostras da classe majoritária.
+This situation may cause the model to bias, i.e., the model to be adjusted too much for the samples of the majority class.
 
-Na prática o modelo responderá muito bem as amostras da classe majoritária, mas terá um desempenho ruim para as amostras da classe minoriária.
+In practice the model will respond very well to the majority class samples, but will perform poorly for the minority class samples.
+
 '''
 
 markdown_class_desbalance_v2 = '''
-Sampling é um pré-processamento que visa minimizar as discrepâncias entre as quantidades de amostras das classes do conjunto de dados, por meio de uma reamostragem. com a finalidade de gerar um conjunto de dados balanceado. Técnicas utilizadas para redefinir o tamanho do conjunto de dados:
+Sampling is a preprocessing that aims to minimize the discrepancies between the sample quantities of the classes of the data set, by means of a re-sampling. with the purpose of generating a balanced data set. Techniques used to redefine the size of the data set:
 
-* **Oversampling**: cria novas amostras da classe minoritária, a partir das informações contidas nos dados originais. Essa geração de novas amostras pode ser feita aleatoriamente com o auxílio de técnicas de clustering ou sinteticamente.
-* **Undersampling**: reduz o desbalanceamento do conjunto de dados, eliminando aleatoriamente amostras da classe majoritária. 
+* Oversampling: creates new samples of the minority class from the information contained in the original data. This generation of new samples can be done randomly with the help of clustering techniques or synthetically.
+**Undersampling**: reduces the unbalancing of the data set by randomly eliminating samples from the majority class. 
 '''
 
 markdown_class_desbalance_v3 = '''
-* **Oversampling** replica os dados já existentes, aumentando o número de instâncias das classes minoritárias. **A vantagem é que nenhuma informação é descartada**, porém o **custo computacional será elevado**.
+**Oversampling** replicates the already existing data, increasing the number of instances of minority classes. **The advantage is that no information is discarded**, but the **computing cost will be high**.
 
-* **Undersampling** extrai um subconjunto aleatório da classe majoritária, **preservando as características da classe**, sendo ideal para situações de grandes volumes de dados. Apesar de reduzir o tempo computacional e de armazenamento, **esta técnica descarta informações da classe majoritária**, o que pode levar a uma performance inferior em suas predições.
+**Undersampling** extracts a random subset of the majority class, **preserving the characteristics of the class**, being ideal for situations of large volumes of data. Although it reduces computational and storage time, **this technique discards majority-class information**, which can lead to lower performance in its predictions.
 '''
 
 markdown_binning = '''
-**Discretização**
+**Discretization**
 
-Operação que transforma dados quantitativos (contínuous) em dados qualitativos, ou seja, atributos numéricos em atributos discretos ou nominais com um número finito de intervalos, obtendo uma partição não sobreposta de um domínio contínuo. Uma associação entre cada intervalo com um valor numérico discreto é então estabelecida. Uma vez que a discretização é realizada, os dados podem ser tratados como dados nominais.
+Operation that transforms quantitative data (contínuous) into qualitative data, that is, numeric attributes into discrete or nominal attributes with a finite number of intervals, obtaining an unimposed partition of a continuous domain. An association between each interval with a discrete numeric value is then established. Once the discretization is performed, the data can be treated as nominal data.
 
-Cria-se bins (buckets ou intervalos) que contenham aproximadamente a mesma quantidade de observações - estratégia quantile.
+Bins (buckets or intervals) are created that contain approximately the same amount of observations - quantile strategy.
 '''
-# ou que sejam igualmente espaçadas - estratégia uniform.
+# or that are equally spaced - uniform strategy.
 
 markdown_scaling = '''
-**Normalização**
+**Normalization**
 
-Consiste em ajustar a escala dos valores de cada atributo, de forma que os valores fiquem em pequenos intervalos, tais como de -1 a 1 ou de 0 a 1. 
+It consists of adjusting the scale of the values of each attribute so that the values are in small ranges, such as -1 to 1 or 0 to 1. 
 
-É recomendável quando os limites inferior e superior de valores dos atributos são muito diferentes, o que leva a uma grande variação de valores, ou ainda quando vários atributos estão em escalas diferentes, para evitar que um atributo predomine sobre outro. 
+It is recommended when the lower and upper limits of attribute values are very different, which leads to a large variation of values, or even when several attributes are on different scales, to avoid that one attribute prevails over another. 
 
-**Normalização Linear - MinMaxScaler**
+**Linear Standardization - MinMaxScaler**
 
-Para colocar no intervalo $[0, 1]$, basta subtrair cada valor do valor mínimo e dividir pela diferença do valor máximo e mínimo:
+To put in the $[0, 1]$ range, just subtract each value from the minimum value and divide by the difference of the maximum and minimum value:
 
 **Xscaled = x - min(x) / max(x) - min(x)**
 
 '''
 
 markdown_standardization = '''
-**Normalização por Desvio Padrão - Padronização**
+**Standardization by Standard Deviation - Standardization **
 
-A normalização por padronização é melhor para lidar com outiliers e padroniza a escala dos dados sem interferir na sua forma. É útil para classificadores, principalmente os que trabalham com distância. 
+Standardization by standardization is best for dealing with outiliers and standardizes the scale of the data without interfering with its shape. It is useful for classifiers, especially those who work with distance.
 
-Consiste em tornar a variável com média zero e variância um, para tanto subtrair a média dos dados de cada observação e dividir pelo desvio-padrão:
+It consists of making the variable zero mean and variance one, to subtract the mean from the data for each observation and divide by the standard deviation:
 
-**Xstandardized = x - x(média amostral) / s**
+** Xstandardized = x - x (sample mean) / s **
 
-onde **s** é o desvio-padrão amostral.
+where ** s ** is the sample standard deviation. 
 '''
 
 markdown_onehot = '''
 **OneHot Encoder**
 
-A codificação tem como finalidade transformar os domínios de valores de determinados atributos do conjunto de dados.
+The encoding aims to transform the value domains of certain attributes of the data set.
 
-Uma das formas mais simples de representação de variáveis categóricas é através do método chamado OneHot Enconding. Com ele, uma variável categórica com $h$ categorias é transformada em $h$ novas variáveis binárias (0 ou 1), onde a presença do 1 (hot) significa que aquela observação pertence aquela categoria e 0 (cold) que não pertence.
+One of the simplest forms of representation of categorical variables is through the method called OneHot Enconding. With it, a categorical variable with $h$ categories is transformed into $h$ new binary variables (0 or 1), where the presence of 1 (hot) means that that observation belongs to that category and 0 (cold) that does not.
 '''
 
 markdown_ordinal = '''
 **Ordinal Encoder**
 
-Nesse método os valores são convertidos em inteiros ordinais. Isso resulta em uma única coluna de inteiros (0 a n_categories - 1) por atributo.
+In this method the values are converted to ordinal integers. This results in a single column of integers (0 to n_categories - 1) per attribute.
 '''
