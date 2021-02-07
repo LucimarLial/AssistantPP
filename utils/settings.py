@@ -3,7 +3,7 @@ import base64
 
 
 
-# -------------------------------- Gera link para download do dataset ----
+# --------------------------------  Generates link to download dataset----
 def get_table_download_link(df):
     """Generates a link allowing the data in a given panda dataframe to be downloaded
         in:  dataframe
@@ -16,7 +16,7 @@ def get_table_download_link(df):
 
 
 
-# ----------------------------- Configurações de cache de leitura de arquivo
+# ----------------------------- File Read Cache Settings
 class FileReference:
 
     def __init__(self, filename):
