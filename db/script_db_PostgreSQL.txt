@@ -1,4 +1,4 @@
----Tabela tb_log_operation para registrar a proveniência da execução dos operadores de pré-processamento sobre as colunas do conjunto de dados
+---Table tb_log_operation to record the provenance of the execution of preprocessing operators on the columns of the dataset
 
 -- Table: public.tb_log_operation
 
@@ -25,7 +25,7 @@ ALTER TABLE public.tb_log_operation
     OWNER to postgres;
 
 
----Necessário para garantir a consistência dos dados, pois foi detectado o problema de registros duplicados para cada reflesh do Assistant-PP, bug Framework Streamlit.
+---Necessary to ensure consistency of data, because the problem of duplicate records was detected for each reflesh of the Assistant-PP, Framework Streamlit bug.
 
 CREATE OR REPLACE FUNCTION drop_duplicates() RETURNS trigger AS $$
 BEGIN
