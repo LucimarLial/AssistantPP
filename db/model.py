@@ -6,7 +6,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
 
-from db import database # conexão com o banco de dados
+from db import database # connection to the database
 
 import streamlit as st
 
@@ -16,8 +16,8 @@ Base = declarative_base()
 BASE_DIR = os.path.join( os.path.abspath('.') )
 DB_DIR = os.path.join( BASE_DIR, 'db' )
 
-# Modelagem da tabela tb_log_operation como classe Python
-# ORM (Object Relational Mapper) cria um wrapper orientado a objetos em torno da conexão do banco de dados, para que seja possível interagir com tabelas como classes Python.
+# Modeling tb_log_operation table as Python class
+# ORM (Object Relational Mapper) creates an object oriented wrapper around the database connection, so that it is possible to interact with tables like Python classes.
 
 class LogOperation(Base):
 
@@ -46,7 +46,7 @@ class LogOperation(Base):
 
 
 
-# Salvar as operações de pré-processamento em tb_log_operation
+# Save preprocessing operations in tb_log_operation
 
 def save_to_database_ORM(conn, **kwargs):
 
@@ -58,7 +58,7 @@ def save_to_database_ORM(conn, **kwargs):
 
 	session.commit()
 	
-# incrementar number_workflow
+# increment number_workflow 
 	
 def query_database_ORM_last_number_workflow(conn):
 
@@ -73,7 +73,7 @@ def query_database_ORM_last_number_workflow(conn):
 	return query + 1
 
 
-# Cria tb_log_operation no banco, caso não exista
+# Creates tb_log_operation in the DB, if it does not exist
 
 engine = database(is_table_log=True)
 LogOperation.__table__.create(bind=engine, checkfirst=True)
