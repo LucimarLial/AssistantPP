@@ -465,7 +465,7 @@ def main():
             
         st.markdown('<br>', unsafe_allow_html=True)
 
-        if select_corr != 'select an option':
+        if select_corr != 'Select an option':
             if df.shape[1] <= 30:
                 plt.rcParams['figure.figsize'] = (10, 8)
                 sns.heatmap(num_features.corr(method=select_corr), annot=True,
