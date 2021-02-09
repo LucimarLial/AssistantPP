@@ -744,7 +744,7 @@ def main():
                         st.markdown(markdown_onehot)
                         st.markdown('<br>', unsafe_allow_html=True)
                     
-                    select_cat_features_nominal = st.multiselect('Inform the columns you want to apply the encoding - OneHot Encoder:', options=list(cat_features.columns))
+                    select_cat_features_nominal = st.multiselect('Inform the columns  to apply the encoding - OneHot Encoder:', options=list(cat_features.columns))
                     list_cat_features_nominal = list(select_cat_features_nominal)
                     st.markdown(list_cat_features_nominal)
                     
@@ -763,17 +763,17 @@ def main():
                     
                     if list_cat_features_nominal:
                         no_preprocessed.extend(list_cat_features_nominal)
-                        st.success('Transformação realizada com sucesso!')
+                        st.success('Successful transformation!')
                 
                 st.markdown('<br>', unsafe_allow_html=True)
                 
                 if st.checkbox('Ordinal (Ordinal Encoder)', key='9'):
-                    if st.checkbox('Explicação da codificação - Ordinal Encoder'):    
+                    if st.checkbox('Coding explanation - Ordinal Encoder'):    
                         st.markdown(markdown_ordinal)
                     
                         st.markdown('<br>', unsafe_allow_html=True)
                     
-                    select_cat_features_ordinal = st.multiselect('Informe as colunas que deseja aplicar a codificação - Ordinal Encoder:', options=list(cat_features.columns))
+                    select_cat_features_ordinal = st.multiselect('Inform the columns  to apply the encoding - Ordinal Encoder:', options=list(cat_features.columns))
                     list_cat_features_ordinal = list(select_cat_features_ordinal)
                     st.markdown(list_cat_features_ordinal)
                     
@@ -849,7 +849,7 @@ def main():
                         st.success('Base disponível para download')
                     
                 
-                    is_completed_select = st.sidebar.selectbox('Completed all preprocessing operations ?', options=('No', 'Yes'))
+                    is_completed_select = st.sidebar.selectbox('Completed all preprocessing operations?', options=('No', 'Yes'))
                     
                     
                     if is_completed_select in 'Yes':
@@ -904,7 +904,7 @@ def main():
                 op5 = list(num_features.columns)
                 op5.insert(0, 'Select an option')
                 
-                select_target_partition = st.selectbox('Enter the target column to generate the pre-processed dataset:', options=list(op5))
+                select_target_partition = st.selectbox('Enter the target column to generate the preprocessed dataset:', options=list(op5))
                 
                 st.markdown('<br>', unsafe_allow_html=True)
                 
