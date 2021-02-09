@@ -276,7 +276,7 @@ def main():
             # 'Dropar'
         ))
 
-        if imputer == 'Input with -1:
+        if imputer == 'Input with -1':
             df.fillna(-1, inplace=True)
             na_dict = { 'NA %' : df[exploration[(exploration['NA %'].drop(columns_missing_to_remove) > 0) & (exploration['type'] != 'object')]['column']].isna().sum() }
             df_no_missing_values = pd.DataFrame(na_dict)
