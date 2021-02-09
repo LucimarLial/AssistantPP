@@ -147,7 +147,7 @@ def main():
         st.markdown('#### 1.2 - Distribution of quantitative and qualitative columns')
         #st.markdown('<br>', unsafe_allow_html=True)
         
-        if st.checkbox('Plotar gráfico', key='21'):
+        if st.checkbox('Plot graph', key='21'):
             op6 = list(df.columns)
             op6.insert(0, 'Select an option')
             
