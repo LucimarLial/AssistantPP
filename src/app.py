@@ -173,7 +173,7 @@ def main():
         
         select_boxplot = st.selectbox('Choose the column to plot a univariate boxplot:', options=op)
         
-        if select_boxplot not in 'Select an option:
+        if select_boxplot not in 'Select an option':
             if len(select_boxplot) > 0:
                 colors = ['#B3F9C5']
                 sns.boxplot(x=select_boxplot, data=df.select_dtypes(include=[np.number]), palette=colors)
