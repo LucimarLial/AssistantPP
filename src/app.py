@@ -642,7 +642,7 @@ def main():
                     strategy_select = st.selectbox('strategy', options=('quantile', 'uniform', 'kmeans'))
                     
                     
-                    select_col_binning = st.multiselect('Inform the columns you want to apply Discretization:', options=list(num_features.drop(select_target, axis=1).columns))
+                    select_col_binning = st.multiselect('Inform the columns to apply discretization:', options=list(num_features.drop(select_target, axis=1).columns))
                     list_col_binning = list(select_col_binning)
                     st.markdown(list_col_binning)
                     st.markdown('<br>', unsafe_allow_html=True)
@@ -744,7 +744,7 @@ def main():
                         st.markdown(markdown_onehot)
                         st.markdown('<br>', unsafe_allow_html=True)
                     
-                    select_cat_features_nominal = st.multiselect('Inform the columns  to apply the encoding - OneHot Encoder:', options=list(cat_features.columns))
+                    select_cat_features_nominal = st.multiselect('Inform the columns to apply the encoding - OneHot Encoder:', options=list(cat_features.columns))
                     list_cat_features_nominal = list(select_cat_features_nominal)
                     st.markdown(list_cat_features_nominal)
                     
