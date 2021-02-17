@@ -553,14 +553,14 @@ def main():
                 st.success('All qualitative columns have been selected!')
             else: 
                 op2 = list(df.columns)
-                op2.insert(0, 'select an option')
+                op2.insert(0, 'Select an option')
                 
                 select_cat_corr = st.selectbox(
                     'Enter the target column to calculate the correlation with the qualitative columns', options=op2)
 
                 cat_corr = {}
 
-                if select_cat_corr != 'select an option':
+                if select_cat_corr != 'Select an option':
                     for col in cat_features.columns:
                         cat_corr[col] = conditional_entropy(
                             cat_features[col], df[select_cat_corr])
@@ -619,7 +619,7 @@ def main():
         st.markdown('### 5 - Data Transformation -  Feature Engineering')
         
         op3 = list(num_features.columns)
-        op3.insert(0, 'Select an option ')
+        op3.insert(0, 'Select an option')
         
         select_target = st.selectbox('Enter the target column:', options=list(op3))
         
