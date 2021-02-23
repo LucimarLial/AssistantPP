@@ -42,7 +42,7 @@ dict_db = {
 
     'function_operator': [
         'DropOutlier', 'Imputation-1', 'Imputation0', 
-        'ImputationAverage', 'ImputationMedian', 'ImputationModa', 
+        'ImputationMean', 'ImputationMedian', 'ImputationMode', 
         'ImputationUnknown', 'LabelEncoder', 'DropQualitativeColumn', 
         'DropQuantitativeColumn', 'IncludeQualitativeColumn', 'IncludeQuantitativeColumn', 
         'KBinsDiscratizer', 'MinMaxScaler', 'StandardScaler', 
@@ -215,7 +215,7 @@ def main():
         
         st.markdown('#### 2.2 - Detect and treat missing values')
         
-        if st.checkbox('Explanation of missing values'):
+        if st.checkbox('Missing values explanation'):
         
             st.markdown(markdown_missing_values)
         
@@ -270,9 +270,9 @@ def main():
             'Select an option',
             'Input with -1',
             'Input with 0',
-            'Input with average',
+            'Input with mean',
             'Input with median',
-            'Input with moda',
+            'Input with mode',
             # 'Dropar'
         ))
 
@@ -299,7 +299,7 @@ def main():
             for col in name_column_list_imputer0:
                 save_to_database_ORM(conn_db, number_workflow=last_number_workflow, name_dataset=str(database_name), name_column=col, function_operator=dict_db['function_operator'][2], name_operator=dict_db['name_operator'][1], type_operator=dict_db['type_operator'][0], timestamp=datetime.now())
 
-        elif imputer == 'Input with average':
+        elif imputer == 'Input with mean':
             df.fillna(
                 df[num_columns_list].mean(), inplace=True)
             na_dict = { 'NA %' : df[exploration[(exploration['NA %'].drop(columns_missing_to_remove) > 0) & (exploration['type'] != 'object')]['column']].isna().sum() }
@@ -323,7 +323,7 @@ def main():
             for col in name_column_list_imputer_median:
                 save_to_database_ORM(conn_db, number_workflow=last_number_workflow, name_dataset=str(database_name), name_column=col, function_operator=dict_db['function_operator'][4], name_operator=dict_db['name_operator'][1], type_operator=dict_db['type_operator'][0], timestamp=datetime.now())
 
-        elif imputer == 'Input with moda':
+        elif imputer == 'Input with mode':
             df.fillna(
                 df[num_columns_list].mode().iloc[0], inplace=True)
             na_dict = { 'NA %' : df[exploration[(exploration['NA %'].drop(columns_missing_to_remove) > 0) & (exploration['type'] != 'object')]['column']].isna().sum() }
@@ -372,7 +372,7 @@ def main():
         
         st.markdown('### 3 - Check imbalance between classes')
         
-        if st.checkbox('Explanation of unbalance'):
+        if st.checkbox('Unbalance explanation'):
         
             st.markdown(markdown_class_desbalance)
         
@@ -446,7 +446,7 @@ def main():
             'Select an option', 'pearson', 'kendall', 'spearman'
         ))
 
-        if st.checkbox('Explanation of the correlation method'):
+        if st.checkbox('Correlation method explanation'):
             st.markdown('''
 				**Pearson's correlation**
 				* Quantitative columns
@@ -633,8 +633,8 @@ def main():
                 
                 is_applied_binning = False
                 
-                if st.checkbox('Contínuas', key='6'):
-                    if st.checkbox('Explanation of Discretization'):        
+                if st.checkbox('Contnuous', key='6'):
+                    if st.checkbox('Discretization Explanation'):        
                         st.markdown(markdown_binning)
             
                     n_bins_slider = st.slider('n_bins', min_value=2, max_value=20, value=5)
@@ -665,7 +665,7 @@ def main():
                         st.success('Successful transformation!')
                 
                 if st.checkbox('Discreet and Continuous'):
-                    if st.checkbox('Explanation of Normalization and Standardization'):   
+                    if st.checkbox('Normalization and Standardization Explanation'):   
                         st.markdown(markdown_scaling)
                         st.markdown('<br>', unsafe_allow_html=True)
                         st.markdown(markdown_standardization)
@@ -740,7 +740,7 @@ def main():
                 no_preprocessed = []
                 
                 if st.checkbox('Nominal (OneHot Encoder)', key='8'):
-                    if st.checkbox('Coding explanation - OneHot Encoder'):  
+                    if st.checkbox('OneHot Encoder explanation'):  
                         st.markdown(markdown_onehot)
                         st.markdown('<br>', unsafe_allow_html=True)
                     
@@ -768,7 +768,7 @@ def main():
                 st.markdown('<br>', unsafe_allow_html=True)
                 
                 if st.checkbox('Ordinal (Ordinal Encoder)', key='9'):
-                    if st.checkbox('Coding explanation - Ordinal Encoder'):    
+                    if st.checkbox('Ordinal Encoder explanation'):    
                         st.markdown(markdown_ordinal)
                     
                         st.markdown('<br>', unsafe_allow_html=True)
@@ -947,7 +947,7 @@ def main():
                                       
                     
                     st.markdown('<br>', unsafe_allow_html=True)
-                    if st.checkbox('Explanation of data sampling correction'):  
+                    if st.checkbox('Data sampling correction explanation'):  
                         st.markdown(markdown_class_desbalance_v2)
                         st.markdown('<br>', unsafe_allow_html=True)
                     
