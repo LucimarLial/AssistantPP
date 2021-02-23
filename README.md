@@ -47,7 +47,7 @@ DB_NAME=PP
 3. name_column => Name of the column that had modifications.
 4. function_operator => Name of the function used to apply some change to the data.
 5. name_operator => Name of executed operator.
-6. type_operator => Type of operator performed.
+6. type_operator => Type of operator executed.
 7. timestamp => datetime of execution. 
 ```
 
