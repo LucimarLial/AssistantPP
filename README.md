@@ -1,6 +1,6 @@
 ## Data Preprocessing Assistant for Classification Problems (Assistant-PP)
 
-Assistant-PP is a tool, developed in Python with the Framework Streamlit, capable of guiding the non-expert user in preprocessing data to generate training and test datasets, from raw datasets. Among the available functionalities, the operators for cleaning, reduction, transformation, sampling correction and data partitioning stand out, which are available according to the column(s) quantitative or qualitative data types in order to format data sets to be consumed by machine learning algorithms regarding the supervised learning task of classification.
+Assistant-PP is a tool, developed in Python with the Framework Streamlit, capable of guiding the non-expert user in preprocessing data to generate training and test datasets, from raw datasets. Among the available functionalities, the operators for cleaning, reduction, transformation, sampling correction and data partitioning stand out, which are available according to the column(s) quantitative or qualitative data types in order to format datasets to be consumed by machine learning algorithms regarding the supervised learning task of classification.
 
 ![](imgs/img-assistent.png)
 
