@@ -128,7 +128,7 @@ $ docker stop <id_container>
 ```
 $ docker start <id_container>
 ```
-## Deploy no heroku  usando Docker
+## Deploy no heroku using Docker
 
 ```bash
 $ heroku container:login
